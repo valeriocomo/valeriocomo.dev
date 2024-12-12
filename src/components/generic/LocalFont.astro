@@ -3,7 +3,9 @@ import { join } from "node:path";
 import { AstroFont } from "astro-font";
 
 const appDir = process.cwd();
-const getFontPath = (name: string) => join(appDir, "public", "fonts", name);
+const isProd = process.env.NODE_ENV === 'production'
+
+const getFontPath = (name: string) => isProd ? join(appDir, "valeriocomo.dev", "public", "fonts", name) :  join(appDir, "public", "fonts", name);
 ---
 
 <AstroFont
