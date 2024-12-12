@@ -19,7 +19,7 @@ import UnoCSS from 'unocss/astro';
 //   },
 // });
 
-const isProduction = process.env.ENVIRONMENT === 'production';
+const isProduction = process.env.NODE_ENV === 'production';
 
 export default defineConfig({
   // site: 'https://valeriocomo.github.io',
