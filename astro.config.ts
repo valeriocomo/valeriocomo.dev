@@ -14,7 +14,8 @@ export default defineConfig({
   base: isProduction ?  'valeriocomo.dev' : '',
   build: {
     assetsPrefix: {
-      'css': `${GH_URL}/${BASE_URL}`
+      'css': `${GH_URL}/${BASE_URL}`,
+      'fallback': `${GH_URL}/${BASE_URL}`
     }
   },
   server: {
