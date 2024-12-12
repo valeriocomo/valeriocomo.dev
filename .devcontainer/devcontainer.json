@@ -15,7 +15,7 @@
 	"postCreateCommand": "sh ./.devcontainer/postCreateCommand.sh",
 	"customizations": {
 		"vscode": {
-			"extensions": ["github.vscode-github-actions"]
+			"extensions": ["github.vscode-github-actions", "astro-build.astro-vscode"]
 		}
 	}
 }
