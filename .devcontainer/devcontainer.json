@@ -2,12 +2,19 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/javascript-node
 {
 	"name": "valeriocomo.dev",
+	"runArgs": [
+		"--name", "valeriocomo.dev"
+	],
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
 	"features": {
 		"ghcr.io/devcontainers-extra/features/firebase-cli:2": {}
 	}, 
-
+	"mounts": [
+		"source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
+		"source=${localWorkspaceFolderBasename}-pnpm-store,target=${containerWorkspaceFolder}/.pnpm-store,type=volume",
+		"source=${localWorkspaceFolderBasename}-pnpm--store,target=${containerWorkspaceFolder}/.pnpm_store,type=volume"
+	],
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 
@@ -15,7 +22,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "git config user.email \"valeriocomo@gmail.com\""
+	"postCreateCommand": "sh ./.devcontainer/postCreateCommand.sh"
 
 	// Configure tool-specific properties.
 	// "customizations": {},
