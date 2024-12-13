@@ -25,7 +25,15 @@
 			"extensions": [
 				"github.vscode-github-actions",
 				"astro-build.astro-vscode"
-			]
+			],
+			"settings": {
+				"editor.formatOnSave": true,
+				"[astro]": {
+					"editor.codeActionsOnSave": {
+						"source.organizeImports": "always"
+					}
+				}
+			}
 		}
 	}
 }
