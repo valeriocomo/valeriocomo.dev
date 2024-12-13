@@ -1,36 +1,50 @@
 ---
-import { BLOG_URL, SOCIALS } from 'src/constants';
+import { BLOG_URL, SOCIALS } from "src/constants";
 
 interface Props {
   pageTitle?: string;
 }
 
 const navigationItems = [
-  { name: 'Home', url: '/', target: '_self' },
-  { name: 'Blog', url: BLOG_URL, target: '_blank' },
+  { name: "Home", url: "/", target: "_self" },
+  { name: "Blog", url: BLOG_URL, target: "_blank" },
 ];
 
 const socialIcons = [
-  ...SOCIALS,
-  { name: 'RSS', url: '/feed.xml', icon: 'i-uil-rss' },
+  {
+    name: "GitHub",
+    url: "https://github.com/valeriocomo",
+    icon: "i-uil-github",
+  },
+  {
+    name: "Twitter",
+    url: "https://www.twitter.com/valeriocomo",
+    icon: "i-uil-twitter",
+  },
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/valeriocomo",
+    icon: "i-uil-linkedin",
+  },
+  { name: "RSS", url: "/feed.xml", icon: "i-uil-rss" } as const,
 ];
 
 const { pageTitle } = Astro.props;
 ---
 
-<header class='border-b-4 border-black flex justify-between p-6 items-center'>
-  {pageTitle && <h1 class='hidden'>{pageTitle}</h1>}
-  <a href='/' title='Back to Home'>
-    <p class='righteous md:text-5xl'>Valerio Como</p>
+<header class="border-b-4 border-black flex justify-between p-6 items-center">
+  {pageTitle && <h1 class="hidden">{pageTitle}</h1>}
+  <a href="/" title="Back to Home">
+    <p class="righteous md:text-5xl">Valerio Como</p>
   </a>
-  <nav class='hidden md:inline-block'>
-    <h2 class='hidden'>Navigation</h2>
-    <ul class='flex gap-8 poppins'>
+  <nav class="hidden md:inline-block">
+    <h2 class="hidden">Navigation</h2>
+    <ul class="flex gap-8 poppins">
       {
         navigationItems.map((item) => (
           <li>
             <a
-              class='text-lg font-medium hover:text-green hover:underline transition-all duration-150 ease-in-out'
+              class="text-lg font-medium hover:text-green hover:underline transition-all duration-150 ease-in-out"
               href={item.url}
               title={`Go to ${item.name}`}
               target={item.target}
@@ -45,19 +59,19 @@ const { pageTitle } = Astro.props;
           <li>
             <a
               href={item.url}
-              class='hover:text-green hover:underline transition-all duration-150 ease-in-out'
-              target='_blank'
+              class="hover:text-green hover:underline transition-all duration-150 ease-in-out"
+              target="_blank"
               title={`'See @ValerioComo on ${item.name}`}
             >
-              <div class:list={[item.icon, 'w-6 h-6']} />
+              <div class:list={[item.icon, "w-6 h-6"]} />
             </a>
           </li>
         ))
       }
     </ul>
   </nav>
-  <nav class='md:hidden flex'>
-    <h2 class='hidden'>Mobile Navigation</h2>
+  <nav class="md:hidden flex">
+    <h2 class="hidden">Mobile Navigation</h2>
     <ul>
       <li><a href={BLOG_URL} target="_blank">Blog</a></li>
     </ul>
