@@ -1,0 +1,42 @@
+---
+import { Button, Card } from "@eliancodes/brutal-ui";
+import { Image } from "astro:assets";
+
+import headshot from "../../assets/me.jpg";
+---
+
+<section id="about" class="grid md:grid-cols-8 gap-8 mt-4">
+	<h2 class="hidden">About Valerio</h2>
+	<div class="flex flex-col md:col-span-6">
+		<Card>
+			<p class="mt-4 outfit text-2xl md:text-5xl lg:text-7xl">
+				Technical Project Manager @<a
+					class="underline underline-white"
+					target="_blank"
+					href="https://innovazione.gov.it/"> DTD</a
+				>
+			</p>
+			<p class="mt-4 outfit text-xl md:text-2xl lg:text-3xl">
+				Open source contributor | NX & Angular enthusiast
+			</p>
+			<p class="mt-4 outfit text-xl md:text-2xl lg:text-3xl">
+				<a
+					class="underline underline-white"
+					target="_blank"
+					href="https://certification.scrumalliance.org/accounts/890101-valerio-como/certifications/1010703-cspo">Agile mindset</a
+				> & Speaker
+			</p>
+			<p class="sanchez mt-4 mb-8 text-lg md:text-xl lg:text-3xl">
+				Based in Puglia 🇮🇹
+			</p>
+			<Button href="/events/">See what I do &rarr;</Button>
+		</Card>
+	</div>
+	<Image
+		class="object-cover h-full w-full rounded-lg md:col-span-2 border-3 border-black card-shadow"
+		src={headshot}
+		alt="Elian Van Cutsem"
+		width={headshot.width}
+		height={headshot.height}
+	/>
+</section>
