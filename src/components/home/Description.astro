@@ -3,92 +3,186 @@ import { Card, Pill } from "@eliancodes/brutal-ui";
 import { Image } from "astro:assets";
 
 const doing = [
-    { name: "Angular", url: "https://angular.dev/" },
+	{ name: "Angular", url: "https://angular.dev/" },
 	{ name: "NX", url: "https://nx.dev/" },
 	{ name: "Tailwind", url: "https://tailwindcss.com/" },
 	{ name: "Devcontainers", url: "https://containers.dev/" },
 	{ name: "Docker", url: "https://docker.com/" },
-	{ name: "NodeJs", url: "https://nodejs.org/"},
-    { name: "Agile", url: 'https://agilemanifesto.org/'},
-	{ name: "Design Angular Kit", url: "https://italia.github.io/design-angular-kit"},
+	{ name: "NodeJs", url: "https://nodejs.org/" },
+	{ name: "Agile", url: "https://agilemanifesto.org/" },
+	{
+		name: "Design Angular Kit",
+		url: "https://italia.github.io/design-angular-kit",
+	},
 	{ name: "Vite", url: "https://vitejs.dev/" },
-	{ name: "React", url: "https://react.dev/"},
+	{ name: "React", url: "https://react.dev/" },
 	{ name: "Astro", url: "https://astro.build/" },
 ];
 
 const techs = [
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", alt: "html5 logo", height: 50 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", alt: "css3 logo", height: 50 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", alt: "javascript logo", height: 50 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", alt: "typescript logo", height: 50 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg", alt: "kotlin logo", height: 50 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg", alt: "swift logo", height: 50 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg", alt: "csharp logo", height: 50 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg", alt: "csharp logo", height: 50 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-plain.svg", alt: "angularjs logo", height: 50 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg", alt: "ionic logo", height: 50 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", alt: "reactjs logo", height: 50 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg", alt: "dot-net logo", height: 50 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg", alt: "nestjs logo", height: 50 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg", alt: "mongodb logo", height: 50 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg", alt: "redis logo", height: 50 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", alt: "docker logo", height: 50 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", alt: "git logo", height: 50 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", alt: "vscode logo", height: 50 }
-]
+	{
+		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+		alt: "html5 logo",
+		height: 50,
+	},
+	{
+		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+		alt: "css3 logo",
+		height: 50,
+	},
+	{
+		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+		alt: "javascript logo",
+		height: 50,
+	},
+	{
+		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+		alt: "typescript logo",
+		height: 50,
+	},
+	{
+		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg",
+		alt: "kotlin logo",
+		height: 50,
+	},
+	{
+		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg",
+		alt: "swift logo",
+		height: 50,
+	},
+	{
+		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg",
+		alt: "csharp logo",
+		height: 50,
+	},
+	{
+		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+		alt: "csharp logo",
+		height: 50,
+	},
+	{
+		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-plain.svg",
+		alt: "angularjs logo",
+		height: 50,
+	},
+	{
+		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg",
+		alt: "ionic logo",
+		height: 50,
+	},
+	{
+		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+		alt: "reactjs logo",
+		height: 50,
+	},
+	{
+		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg",
+		alt: "dot-net logo",
+		height: 50,
+	},
+	{
+		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg",
+		alt: "nestjs logo",
+		height: 50,
+	},
+	{
+		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+		alt: "mongodb logo",
+		height: 50,
+	},
+	{
+		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg",
+		alt: "redis logo",
+		height: 50,
+	},
+	{
+		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+		alt: "docker logo",
+		height: 50,
+	},
+	{
+		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+		alt: "git logo",
+		height: 50,
+	},
+	{
+		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
+		alt: "vscode logo",
+		height: 50,
+	},
+];
 ---
 
 <section class="mt-8 grid md:grid-cols-2 gap-8">
-	<div class="flex flex-col gap-8">
-	<Card>
-		<h2 class="text-2xl md:text-4xl lg:text-6xl mb-8 dm-serif">
-			Techs
-		</h2>
-		<ul class="flex gap-4">
-            {techs.map(t => (<li><Image class="rounded-full" alt={t.alt} src={t.src} width={t.height} height={t.height}></Image></li>))}
-		</ul>
-	</Card>
-	<Card>
-		<h2 class="text-2xl md:text-4xl lg:text-6xl mb-8 dm-serif">
-			Daily
-		</h2>
-		<ul class="flex gap-4 flex-wrap">
-			{
-				doing.map((item) => (
-					<li class="sanchez">
-						<Pill>
-							<a href={item.url} target="_blank" title={`Go to ${item.name}`}>
-								{item.name}
-							</a>
-						</Pill>
-					</li>
-				))
-			}
-		</ul>
-	</Card>
-	</div>
 	<Card color="orange">
-		<h2 class="text-2xl md:text-4xl lg:text-6xl mb-4 dm-serif">Who am I?</h2>
+		<h2 class="text-2xl md:text-4xl lg:text-6xl mb-4 dm-serif">About me</h2>
 		<p class="poppins">
-			Hi, I’m Valerio and I'm an all-around software engineer located in Italy. I'm working as
-			Technical Project Manager at <a
+			Hi, I’m Valerio and I'm an all-around software engineer located in
+			Italy. I'm working as Technical Project Manager at <a
 				href="https://innovazione.gov.it"
 				class="underline"
 				target="_blank">Dipartimento per la Trasformazione Digitale</a
-			>. I wrote my first program in early 00's using Turbo Pascal. Graduated in Computer Science, I started developing Web Application.
+			>. I wrote my first program in early 00's using Turbo Pascal.
+			Graduated in Computer Science, I started developing Web Application.
 		</p>
 		<p class="poppins mt-2">
-            I'm into software design, Micro-Frontend, Microservices and DDD.
+			I'm into software design, Micro-Frontend, Microservices and DDD.
 			Today, I'm mainly focussed on software architecture in general.
 		</p>
-        <p class="poppins mt-2">
-            DX is another relevant topic for me, testing and using tools to improve team performance.
+		<p class="poppins mt-2">
+			DX is another relevant topic for me, testing and using tools to
+			improve team performance.
 		</p>
 		<p class="poppins mt-2">
-            I love working with Angular and NX but also with NodeJS and .NET.
+			I love working with Angular and NX but also with NodeJS and .NET.
 		</p>
-        <p class="poppins mt-2">
-            Sometimes I like <a href="/events">giving talks</a> about Angular and beyond.
-        </p>
+		<p class="poppins mt-2">
+			Sometimes I like <a href="/events">giving talks</a> about Angular
+			and beyond.
+		</p>
 	</Card>
+	<div class="flex flex-col gap-8">
+		<Card>
+			<h2 class="text-2xl md:text-4xl lg:text-6xl mb-8 dm-serif">
+				Techs
+			</h2>
+			<ul class="flex gap-4">
+				{
+					techs.map((t) => (
+						<li>
+							<Image
+								class="rounded-full"
+								alt={t.alt}
+								src={t.src}
+								width={t.height}
+								height={t.height}
+							/>
+						</li>
+					))
+				}
+			</ul>
+		</Card>
+		<Card>
+			<h2 class="text-2xl md:text-4xl lg:text-6xl mb-8 dm-serif">
+				Daily
+			</h2>
+			<ul class="flex gap-4 flex-wrap">
+				{
+					doing.map((item) => (
+						<li class="sanchez">
+							<Pill>
+								<a
+									href={item.url}
+									target="_blank"
+									title={`Go to ${item.name}`}
+								>
+									{item.name}
+								</a>
+							</Pill>
+						</li>
+					))
+				}
+			</ul>
+		</Card>
+	</div>
 </section>
