@@ -10,7 +10,7 @@ export const SOCIALS = [
         icon: 'i-uil-twitter',
     },
     {
-        name: 'LinkedIn',
+        name: 'Linkedin',
         url: 'https://www.linkedin.com/in/valeriocomo',
         icon: 'i-uil-linkedin',
     },
