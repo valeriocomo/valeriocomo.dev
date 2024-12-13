@@ -1,14 +1,13 @@
 {
-  "name": "site",
-  "version": "1.2.0",
+  "name": "valeriocomo.dev",
+  "version": "0.0.0",
   "type": "module",
   "packageManager": "pnpm@8.6.0",
   "author": {
-    "name": "Elian Van Cutsem",
-    "email": "hello@elian.codes",
-    "url": "https://www.elian.codes/"
+    "name": "Valerio Como",
+    "url": "https://valeriocomo.dev/"
   },
-  "homepage": "https://brutal.elian.codes",
+  "homepage": "https://valeriocomo.dev/",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
