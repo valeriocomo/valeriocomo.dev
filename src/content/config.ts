@@ -27,5 +27,5 @@ const eventCollection = defineCollection({
 
 export const collections = {
   blog: blogCollection,
-  event: eventCollection
+  events: eventCollection
 };

@@ -4,5 +4,5 @@ abstract: A number of exciting new features have changed the made-in-Google fram
 link: "https://gdg.community.dev/events/details/google-gdg-bari-presents-devfest-bari-2023/"
 date: 2023-12-02
 name: "Devfest Bari 2023"
-img: "/src/assets/events/23-12-02-devfest-bari.webp"
+img: "../../assets/events/23-12-02-devfest-bari.webp"
 ---
