@@ -2,13 +2,23 @@
 import { BLOG_URL } from "src/constants";
 import MobileNavigation from "./MobileNavigation.astro";
 
+const { BASE_URL: baseUrl, NODE_ENV } = import.meta.env;
+
+const urlBuilder = (path: string) => {
+  if (NODE_ENV === "production") {
+    return `${baseUrl}/${path}`;
+  } else {
+    return path ? `${baseUrl}${path}` : `${baseUrl}`;
+  }
+};
+
 interface Props {
   pageTitle?: string;
 }
 
 const navigationItems = [
-  { name: "Home", url: "", target: "_self" },
-  { name: "Events", url: "events" },
+  { name: "Home", url: urlBuilder(""), target: "_self" },
+  { name: "Events", url: urlBuilder(`events`) },
   { name: "Blog", url: BLOG_URL, target: "_blank" },
 ];
 
