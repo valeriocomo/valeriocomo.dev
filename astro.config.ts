@@ -8,10 +8,8 @@ const BASE_URL = 'valeriocomo.dev'
 const isProduction = process.env.NODE_ENV === 'production';
 
 export default defineConfig({
-  // site: 'https://valeriocomo.github.io',
-  // base: 'valeriocomo.dev',
-  site: isProduction  ? 'https://valeriocomo.github.io' : 'https://localhost:3000/',
-  base: isProduction ?  'valeriocomo.dev' : '',
+  site: isProduction ? 'https://valeriocomo.github.io' : 'https://localhost:3000/',
+  base: isProduction ? 'valeriocomo.dev' : '',
   build: {
     assetsPrefix: {
       'css': `${GH_URL}/${BASE_URL}`,
@@ -28,5 +26,5 @@ export default defineConfig({
     optimizeDeps: {
       exclude: ['@resvg/resvg-js'],
     },
-  },  
+  },
 })

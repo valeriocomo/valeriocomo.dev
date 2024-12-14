@@ -5,7 +5,7 @@ import MobileNavigation from "./MobileNavigation.astro";
 const { BASE_URL: baseUrl, NODE_ENV } = import.meta.env;
 
 const urlBuilder = (path: string) => {
-  if (NODE_ENV === "production") {
+  if (NODE_ENV === "production" && baseUrl !== "/") {
     return `${baseUrl}/${path}`;
   } else {
     return path ? `${baseUrl}${path}` : `${baseUrl}`;
