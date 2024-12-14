@@ -1,5 +1,6 @@
 ---
 import { BLOG_URL } from "src/constants";
+import MobileNavigation from "./MobileNavigation.astro";
 
 interface Props {
   pageTitle?: string;
@@ -7,6 +8,7 @@ interface Props {
 
 const navigationItems = [
   { name: "Home", url: "/", target: "_self" },
+  { name: "Events", url: "/events" },
   { name: "Blog", url: BLOG_URL, target: "_blank" },
 ];
 
@@ -70,10 +72,5 @@ const { pageTitle } = Astro.props;
       }
     </ul>
   </nav>
-  <nav class="md:hidden flex">
-    <h2 class="hidden">Mobile Navigation</h2>
-    <ul>
-      <li><a href={BLOG_URL} target="_blank">Blog</a></li>
-    </ul>
-  </nav>
+  <MobileNavigation items={navigationItems} />
 </header>
