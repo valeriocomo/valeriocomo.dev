@@ -16,4 +16,18 @@ export const SOCIALS = [
     },
 ] as const;
 
+
+const { BASE_URL: baseUrl, NODE_ENV } = import.meta.env;
+
+const urlBuilder = (path: string) => {
+    if (NODE_ENV === "production" && baseUrl !== "/") {
+        return `${baseUrl}/${path}`;
+    } else {
+        return path ? `${baseUrl}${path}` : `${baseUrl}`;
+    }
+};
+
+export const HOME_URL = urlBuilder("");
+export const EVENTS_URL = urlBuilder("events");
+
 export const BLOG_URL = 'https://medium.com/@valeriocomo'

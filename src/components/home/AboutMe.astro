@@ -2,6 +2,7 @@
 import { Button, Card } from "@eliancodes/brutal-ui";
 import { Image } from "astro:assets";
 
+import { EVENTS_URL } from "src/constants";
 import headshot from "../../assets/me.jpg";
 ---
 
@@ -13,7 +14,9 @@ import headshot from "../../assets/me.jpg";
 				Technical Project Manager @<a
 					class="underline underline-white"
 					target="_blank"
-					href="https://innovazione.gov.it/"> DTD</a
+					href="https://innovazione.gov.it/"
+				>
+					DTD</a
 				>
 			</p>
 			<p class="mt-4 outfit text-xl md:text-2xl lg:text-3xl">
@@ -23,13 +26,14 @@ import headshot from "../../assets/me.jpg";
 				<a
 					class="underline underline-white"
 					target="_blank"
-					href="https://certification.scrumalliance.org/accounts/890101-valerio-como/certifications/1010703-cspo">Agile mindset</a
+					href="https://certification.scrumalliance.org/accounts/890101-valerio-como/certifications/1010703-cspo"
+					>Agile mindset</a
 				> & Speaker
 			</p>
 			<p class="sanchez mt-4 mb-8 text-lg md:text-xl lg:text-3xl">
 				Based in Puglia 🇮🇹
 			</p>
-			<Button href="/events/">See what I do &rarr;</Button>
+			<Button href={EVENTS_URL} `>See what I do &rarr;</Button>
 		</Card>
 	</div>
 	<Image

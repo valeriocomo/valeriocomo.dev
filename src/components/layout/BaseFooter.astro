@@ -1,4 +1,6 @@
 ---
+import { HOME_URL } from "src/constants";
+
 export interface Props {
   backToTop?: boolean;
 }
@@ -39,7 +41,9 @@ const { backToTop = false } = Astro.props;
     Build with <span class:list={["i-uil-heart-alt", "w-2 h-2 p-2"]}
       >&nbsp;</span
     >
-     using Astro - by <a href="/" target="_blank" class="text-blue">Valerio</a>
+     using Astro - by <a href={HOME_URL} target="_blank" class="text-blue"
+      >Valerio</a
+    >
   </p>
 </footer>
 

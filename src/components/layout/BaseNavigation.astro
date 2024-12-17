@@ -1,24 +1,14 @@
 ---
-import { BLOG_URL } from "src/constants";
+import { BLOG_URL, EVENTS_URL, HOME_URL } from "src/constants";
 import MobileNavigation from "./MobileNavigation.astro";
-
-const { BASE_URL: baseUrl, NODE_ENV } = import.meta.env;
-
-const urlBuilder = (path: string) => {
-  if (NODE_ENV === "production" && baseUrl !== "/") {
-    return `${baseUrl}/${path}`;
-  } else {
-    return path ? `${baseUrl}${path}` : `${baseUrl}`;
-  }
-};
 
 interface Props {
   pageTitle?: string;
 }
 
 const navigationItems = [
-  { name: "Home", url: urlBuilder(""), target: "_self" },
-  { name: "Events", url: urlBuilder(`events`) },
+  { name: "Home", url: HOME_URL, target: "_self" },
+  { name: "Events", url: EVENTS_URL },
   { name: "Blog", url: BLOG_URL, target: "_blank" },
 ];
 
@@ -46,7 +36,7 @@ const { pageTitle } = Astro.props;
 
 <header class="border-b-4 border-black flex justify-between p-6 items-center">
   {pageTitle && <h1 class="hidden">{pageTitle}</h1>}
-  <a href="/" title="Back to Home">
+  <a href={HOME_URL} title="Back to Home">
     <p class="righteous md:text-5xl">Valerio Como</p>
   </a>
   <nav class="hidden md:inline-block">
