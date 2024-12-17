@@ -1,5 +1,5 @@
 ---
-import { HOME_URL } from "src/constants";
+import { HOME_URL, REPO_URL } from "src/constants";
 
 export interface Props {
   backToTop?: boolean;
@@ -41,7 +41,7 @@ const { backToTop = false } = Astro.props;
     Build with <span class:list={["i-uil-heart-alt", "w-2 h-2 p-2"]}
       >&nbsp;</span
     >
-     using Astro - by <a href={HOME_URL} target="_blank" class="text-blue"
+     using Astro - by <a href={REPO_URL} target="_blank" class="text-blue"
       >Valerio</a
     >
   </p>
