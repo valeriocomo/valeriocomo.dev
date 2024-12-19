@@ -3,6 +3,9 @@ import { Card, Pill } from "@eliancodes/brutal-ui";
 import { Image } from "astro:assets";
 import { EVENTS_URL } from "src/constants";
 
+const ICON_WIDTH = 25,
+	ICON_HEIGHT = 25;
+
 const doing = [
 	{ name: "Angular", url: "https://angular.dev/" },
 	{ name: "NX", url: "https://nx.dev/" },
@@ -24,82 +27,98 @@ const techs = [
 	{
 		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
 		alt: "javascript logo",
-		height: 50,
+		height: ICON_HEIGHT,
+		width: ICON_WIDTH,
 	},
 	{
 		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
 		alt: "typescript logo",
-		height: 50,
+		height: ICON_HEIGHT,
+		width: ICON_WIDTH,
 	},
 	{
 		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg",
 		alt: "kotlin logo",
-		height: 50,
+		height: ICON_HEIGHT,
+		width: ICON_WIDTH,
 	},
 	{
 		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg",
 		alt: "swift logo",
-		height: 50,
+		height: ICON_HEIGHT,
+		width: ICON_WIDTH,
 	},
 	{
 		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg",
 		alt: "csharp logo",
-		height: 50,
+		height: ICON_HEIGHT,
+		width: ICON_WIDTH,
 	},
 	{
 		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
 		alt: "csharp logo",
-		height: 50,
+		height: ICON_HEIGHT,
+		width: ICON_WIDTH,
 	},
 	{
-		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-plain.svg",
+		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg",
 		alt: "angularjs logo",
-		height: 50,
+		height: ICON_HEIGHT,
+		width: ICON_WIDTH,
 	},
 	{
 		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg",
 		alt: "ionic logo",
-		height: 50,
+		height: ICON_HEIGHT,
+		width: ICON_WIDTH,
 	},
 	{
 		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
 		alt: "reactjs logo",
-		height: 50,
+		height: ICON_HEIGHT,
+		width: ICON_WIDTH,
 	},
 	{
 		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg",
 		alt: "dot-net logo",
-		height: 50,
+		height: ICON_HEIGHT,
+		width: ICON_WIDTH,
 	},
 	{
 		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg",
 		alt: "nestjs logo",
-		height: 50,
+		height: ICON_HEIGHT,
+		width: ICON_WIDTH,
 	},
 	{
 		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
 		alt: "mongodb logo",
-		height: 50,
+		height: ICON_HEIGHT,
+		width: ICON_WIDTH,
 	},
 	{
 		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg",
 		alt: "redis logo",
-		height: 50,
+		height: ICON_HEIGHT,
+		width: ICON_WIDTH,
 	},
 	{
 		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
 		alt: "docker logo",
-		height: 50,
+		height: ICON_HEIGHT,
+		width: ICON_WIDTH,
 	},
 	{
 		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
 		alt: "git logo",
-		height: 50,
+		height: ICON_HEIGHT,
+		width: ICON_WIDTH,
 	},
 	{
 		src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
 		alt: "vscode logo",
-		height: 50,
+		height: ICON_HEIGHT,
+		width: ICON_WIDTH,
 	},
 ];
 ---
@@ -137,18 +156,18 @@ const techs = [
 	<div class="flex flex-col gap-8">
 		<Card>
 			<h2 class="text-2xl md:text-4xl lg:text-6xl mb-8 dm-serif">
-				Techs
+				Tech radar
 			</h2>
-			<ul class="flex gap-4">
+			<ul class="flex gap-4 flex-wrap">
 				{
-					techs.map((t) => (
+					techs.map(({ alt, src, width, height }) => (
 						<li>
 							<Image
 								class="rounded-full"
-								alt={t.alt}
-								src={t.src}
-								width={t.height}
-								height={t.height}
+								alt={alt}
+								src={src}
+								width={width}
+								height={height}
 							/>
 						</li>
 					))
