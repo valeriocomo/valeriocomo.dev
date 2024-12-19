@@ -31,4 +31,5 @@ export const HOME_URL = urlBuilder("");
 export const EVENTS_URL = urlBuilder("events");
 
 export const BLOG_URL = 'https://medium.com/@valeriocomo'
+export const GITHUB_URL = 'https://github.com/valeriocomo'
 export const REPO_URL = 'https://github.com/valeriocomo/valeriocomo.dev'

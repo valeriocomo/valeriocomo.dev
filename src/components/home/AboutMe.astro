@@ -2,7 +2,7 @@
 import { Button, Card } from "@eliancodes/brutal-ui";
 import { Image } from "astro:assets";
 
-import { EVENTS_URL } from "src/constants";
+import { GITHUB_URL } from "src/constants";
 import headshot from "../../assets/me.webp";
 ---
 
@@ -33,7 +33,9 @@ import headshot from "../../assets/me.webp";
 			<p class="sanchez mt-4 mb-8 text-lg md:text-xl lg:text-3xl">
 				Based in Puglia 🇮🇹
 			</p>
-			<Button href={EVENTS_URL} `>See what I do &rarr;</Button>
+			<Button href={GITHUB_URL} ` target="_blank">
+				See what I do &rarr;
+			</Button>
 		</Card>
 	</div>
 	<Image
