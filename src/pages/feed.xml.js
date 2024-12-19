@@ -3,6 +3,12 @@ import { getCollection } from 'astro:content';
 
 export async function GET(context) {
   const blog = await getCollection('blog');
+  console.log(blog.map((post) => ({
+    title: post.data.title,
+    pubDate: post.data.pubDate,
+    description: post.data.description,
+    link: `/blog/${post.slug}/`,
+  })),)
   return rss({
     title: 'Valerio Como',
     description: 'Software engineer born and bread in Puglia',
