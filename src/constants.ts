@@ -30,6 +30,8 @@ const urlBuilder = (path: string) => {
 export const HOME_URL = urlBuilder("");
 export const EVENTS_URL = urlBuilder("events");
 
+export const FAVICON_URL = urlBuilder("favicon/favicon.ico")
+
 export const BLOG_URL = 'https://medium.com/@valeriocomo'
 export const GITHUB_URL = 'https://github.com/valeriocomo'
 export const REPO_URL = 'https://github.com/valeriocomo/valeriocomo.dev'
