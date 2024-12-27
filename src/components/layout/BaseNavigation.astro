@@ -1,5 +1,5 @@
 ---
-import { BLOG_URL, EVENTS_URL, HOME_URL } from "src/constants";
+import { BLOG_URL, HOME_URL, TALKS_URL } from "src/constants";
 import MobileNavigation from "./MobileNavigation.astro";
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 
 const navigationItems = [
   { name: "Home", url: HOME_URL, target: "_self" },
-  { name: "Events", url: EVENTS_URL },
+  { name: "Talks", url: TALKS_URL },
   { name: "Blog", url: BLOG_URL, target: "_blank" },
 ];
 

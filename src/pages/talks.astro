@@ -1,0 +1,27 @@
+---
+import TalkSummaryCard from "@components/talks/TalkSummaryCard.astro";
+import Layout from "@layouts/Default.astro";
+import { getCollection } from "astro:content";
+
+const talks = await getCollection("talks").then((talks) =>
+    talks.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
+);
+---
+
+<Layout
+    title="Talks"
+    pageTitle="Valerio Como | Talks"
+    description="See upcoming and past talks Valerio took part in as a speaker."
+>
+    <main class="bg-yellow p-6">
+        <ul class="grid md:grid-cols-3 2xl:grid-cols-4 gap-8">
+            {
+                talks.map((event) => (
+                    <li>
+                        <TalkSummaryCard talk={event} />
+                    </li>
+                ))
+            }
+        </ul>
+    </main>
+</Layout>

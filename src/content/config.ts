@@ -13,7 +13,7 @@ const blogCollection = defineCollection({
     }),
 });
 
-const eventCollection = defineCollection({
+const talksCollection = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -27,5 +27,5 @@ const eventCollection = defineCollection({
 
 export const collections = {
   blog: blogCollection,
-  events: eventCollection
+  talks: talksCollection
 };

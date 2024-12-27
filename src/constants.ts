@@ -28,7 +28,7 @@ const urlBuilder = (path: string) => {
 };
 
 export const HOME_URL = urlBuilder("");
-export const EVENTS_URL = urlBuilder("events");
+export const TALKS_URL = urlBuilder("talks");
 
 export const FAVICON_URL = urlBuilder("favicon/favicon.ico")
 

@@ -4,11 +4,11 @@ import { Button } from "@eliancodes/brutal-ui";
 import type { CollectionEntry } from "astro:content";
 
 export interface Props {
-    event: CollectionEntry<"events">;
+    talk: CollectionEntry<"talks">;
 }
 
-const { event } = Astro.props;
-const { data } = event;
+const { talk } = Astro.props;
+const { data } = talk;
 ---
 
 <SummaryCard
