@@ -7,11 +7,11 @@ const BASE_URL = 'valeriocomo.dev'
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-const site = isProduction ? GH_URL : 'https://localhost:3000/'
-const base = isProduction ? BASE_URL : ''
+const site = isProduction ? BASE_URL : 'https://localhost:3000/'
+const base = '' //isProduction ? BASE_URL : ''
 
 export default defineConfig({
-  site: isProduction ? 'https://valeriocomo.github.io' : 'https://localhost:3000/',
+  site,
   base: isProduction ? 'valeriocomo.dev' : '',
   build: {
     assetsPrefix: {
