@@ -2,6 +2,8 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import UnoCSS from 'unocss/astro';
 
+import partytown from '@astrojs/partytown';
+
 const BASE_URL = 'https://valeriocomo.dev'
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -17,7 +19,11 @@ export default defineConfig({
     port: 4321
   },
   trailingSlash: 'ignore',
-  integrations: [sitemap(), UnoCSS({ injectReset: true })],
+  integrations: [
+    sitemap(),
+    UnoCSS({ injectReset: true }),
+    partytown({ config: { forward: ["dataLayer.push"] } })
+  ],
   vite: {
     optimizeDeps: {
       exclude: ['@resvg/resvg-js'],
