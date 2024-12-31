@@ -2,12 +2,12 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import UnoCSS from 'unocss/astro';
 
-const GH_URL = 'https://valeriocomo.github.io'
-const BASE_URL = 'valeriocomo.dev'
+// const GH_URL = 'https://valeriocomo.github.io'
+const BASE_URL = 'https://valeriocomo.dev'
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-const site = isProduction ? BASE_URL : 'https://localhost:3000/'
+const site = isProduction ? BASE_URL : 'http://localhost:3000/'
 const base = '' //isProduction ? BASE_URL : ''
 
 export default defineConfig({
