@@ -2,23 +2,16 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import UnoCSS from 'unocss/astro';
 
-// const GH_URL = 'https://valeriocomo.github.io'
 const BASE_URL = 'https://valeriocomo.dev'
 
 const isProduction = process.env.NODE_ENV === 'production';
 
 const site = isProduction ? BASE_URL : 'http://localhost:3000/'
-const base = '' //isProduction ? BASE_URL : ''
+const base = ''
 
 export default defineConfig({
   site,
-  base: isProduction ? 'valeriocomo.dev' : '',
-  build: {
-    assetsPrefix: {
-      'css': `${site}/${base}`,
-      'fallback': `${site}/${base}`
-    }
-  },
+  base,
   server: {
     host: "127.0.0.1",
     port: 4321
