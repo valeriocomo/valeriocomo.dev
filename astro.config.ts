@@ -10,7 +10,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 const site = isProduction ? BASE_URL : 'http://localhost:3000/'
 const base = ''
-
+//https://daniel.es/blog/the-ultimate-astro-google-analytics-guide/
 export default defineConfig({
   site,
   base,
