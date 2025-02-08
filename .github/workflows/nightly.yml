@@ -16,12 +16,12 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9
 
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
 
       - name: Install dependencies
@@ -35,7 +35,7 @@ jobs:
         with:
           branch: ci/update-astro
           commit-message: 'ci: update Astro'
-          assignees: eliancodes
+          assignees: valeriocomo
           title: 'ci: update Astro'
           body: Update Astro and packages to latest version
           labels: ci
