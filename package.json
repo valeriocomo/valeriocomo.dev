@@ -2,7 +2,7 @@
   "name": "valeriocomo.dev",
   "version": "0.0.0",
   "type": "module",
-  "packageManager": "pnpm@8.6.0",
+  "packageManager": "pnpm@9.0.0",
   "author": {
     "name": "Valerio Como",
     "url": "https://valeriocomo.dev/"
