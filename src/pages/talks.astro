@@ -4,7 +4,9 @@ import Layout from "@layouts/Default.astro";
 import { getCollection } from "astro:content";
 
 const talks = await getCollection("talks").then((talks) =>
-    talks.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
+    talks
+        .filter(({ data: { date } }) => date <= Date.now())
+        .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
 );
 ---
 
