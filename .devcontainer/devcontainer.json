@@ -25,6 +25,7 @@
 			"extensions": [
 				"github.vscode-github-actions",
 				"github.vscode-pull-request-github",
+				"redhat.vscode-yaml",
 				"astro-build.astro-vscode"
 			],
 			"settings": {
