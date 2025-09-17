@@ -8,7 +8,7 @@ const BASE_URL = 'https://valeriocomo.dev'
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-const site = isProduction ? BASE_URL : 'http://localhost:3000/'
+const site = isProduction ? BASE_URL : 'http://localhost:4321/'
 const base = ''
 //https://daniel.es/blog/the-ultimate-astro-google-analytics-guide/
 export default defineConfig({

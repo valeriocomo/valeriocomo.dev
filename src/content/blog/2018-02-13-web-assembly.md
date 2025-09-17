@@ -7,7 +7,6 @@ tags:
   - JavaScript
 imgUrl: '../../assets/blog/2018-02-13-web-assembly/cover.png'
 description: A brief introduction to WebAssembly, starting with a newsletter from Javascript Weekly and ending with features, going through a brief history of web development in recent years
-layout: '../../layouts/BlogPost.astro'
 ---
 
 Web Assembly
