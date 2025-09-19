@@ -5,7 +5,7 @@ import { getCollection } from "astro:content";
 
 const talks = await getCollection("talks").then((talks) =>
     talks
-        .filter(({ data: { date } }) => date <= Date.now())
+        .filter(({ data: { date } }) => date.getTime() <= Date.now())
         .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
 );
 ---
