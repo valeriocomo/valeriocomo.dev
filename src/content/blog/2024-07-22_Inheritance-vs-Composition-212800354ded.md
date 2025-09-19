@@ -37,7 +37,7 @@ Throughout my whole career, I debated a lot with my colleagues about what was th
 
 #### Example
 
-```
+```typescript
 class Animal {  
     speak(): string {  
         return "Some sound";  
@@ -72,7 +72,7 @@ The `Dog` class inherits from the `Animal` class, demonstrating how a subclass c
 
 #### Example
 
-```
+```typescript
 class Engine {  
     start(): string {  
         return "Engine starting";  
