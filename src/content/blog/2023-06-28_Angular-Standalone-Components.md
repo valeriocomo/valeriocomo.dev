@@ -18,7 +18,7 @@ description: Shifting from a module-oriented organization to a component-oriente
 
 Angular Standalone Components
 
-*Standalone Components* is a one of the most interesting innovations in the Angular ecosystem in recent years. In my humble opinion, one of the most exciting alongside Angular Signals ([checkout my post about Signals!](https://medium.com/tech-bits-pub/angular-signals-4359cd77e7e0)).
+*Standalone Components* is a one of the most interesting innovations in the Angular ecosystem in recent years. In my humble opinion, one of the most exciting alongside Angular Signals ([checkout my post about Signals!](/blog/2023-04-14_angular-signals)).
 
 This feature aims to simplify the organization of an Angular project. Furthermore, it helps to flatten the learning curve, lowering the entry barrier for new developers.
 
@@ -30,7 +30,7 @@ But, why does Angular need its own module system? An Angular module, *NgModule*,
 
 This is a simple example of a Standalone Component:
 
-![](https://cdn-images-1.medium.com/max/800/1*wQ8t5hBS1aU7tQR2Z0ohEg.png)
+![](../../assets/blog/2023-06-28-angular-standalone-components/image1.png)
 
 A simple example
 
@@ -42,7 +42,7 @@ The bootstrapping of an Angular application starts from a module (usually *AppMo
 
 The adoption of Standalone Components brings a new way to bootstrap an Angular application. This example is taken from a real project I am working on.
 
-![](https://cdn-images-1.medium.com/max/800/1*Xr6CcqNUeTn-xb76dk7xxg.png)
+![](../../assets/blog/2023-06-28-angular-standalone-components/image2.png)
 
 A main.ts taken form a real world project
 
@@ -65,7 +65,7 @@ Standalone Components brings a fresh air to Angular. Some tiny changes have been
 
 Standalone Components could be loaded lazily by using *loadComponent.*
 
-![](https://cdn-images-1.medium.com/max/800/1*7C772_Fe7Z597du406saAw.png)
+![](../../assets/blog/2023-06-28-angular-standalone-components/image3.png)
 
 A loadComponent example
 
