@@ -35,7 +35,7 @@ To keep things simple, we’ll use the same example throughout: a simple web ser
 
 We will start with the following Dockerfile:
 
-```
+```docker
 FROM node:latest  
 WORKDIR /app  
 COPY . .  
@@ -49,7 +49,7 @@ The choice of base image has a huge impact on the final image size. Sometimes, f
 
 Instead, we can use a *Alpine Linux* flavor, a lightweight distribution tailored for containers.
 
-```
+```docker
 FROM node:20-alpine  
 WORKDIR /app  
 COPY . .  
@@ -71,7 +71,7 @@ Google has taken the concept to the edge, creating *Distroless* images. These im
 
 A simple addition lightweights your Docker image. Starting from the previous Dockerfile, we’ll add just one line
 
-```
+```docker
 FROM node:20-alpine  
 WORKDIR /app  
 COPY . .  
@@ -96,7 +96,7 @@ There are three main reasons for cache invalidation:
 
 In the following Dockerfile, it’s will copy just *package\*.json* files. This is because dependencies change less frequent than our code. Then Docker will create a layer. So if dependencies don’t change, its layer will be cached.
 
-```
+```docker
 FROM node:20-alpine  
 WORKDIR /app  
 COPY package*.json .  
@@ -112,7 +112,7 @@ This reuses the same cache version until one of the dependencies is changed in *
 
 As stated in previous paragraph, each `RUN` statement in Dockerfile creates a new **layer**. Too many layers lead to **larger images** and slower builds. We can combine commands into a single layer to **minimize image size**:
 
-```
+```docker
 FROM node:20-alpine  
 WORKDIR /app  
 COPY package*.json .  
@@ -125,7 +125,7 @@ CMD ["node", "server.js"]
 
 A common issue with Docker images is the presence of unnecessary build tools in the shipped image. Multi-stage builds enable us to keep build dependencies separate from the final runtime image.
 
-```
+```docker
 # Build Stage  
 FROM node:20 AS builder  
 WORKDIR /app  
@@ -148,7 +148,7 @@ This topic will be covered in depth in one of the next posts in this series.
 
 A `.dockerignore` acts as a *.gitignore* file. It prevents unnecessary files from being copied into the image. Add files like:
 
-```
+```bash
 node_modules  
 .git  
 .env  
@@ -161,7 +161,7 @@ This ensures a cleaner, faster build process. Straightforward.
 
 Whenever writing a Dockerfile, avoid the`latest` tag in Production**.** You must remember to specify an exact version of your runtime instead of relying on `latest`:
 
-```
+```docker
 FROM node:20.5.1-alpine
 ```
 
