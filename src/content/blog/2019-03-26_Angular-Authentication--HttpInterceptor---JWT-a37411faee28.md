@@ -1,5 +1,5 @@
 ---
-title:  'Angular Authentication: HttpInterceptor + JWT'
+title: 'Angular Authentication: HttpInterceptor + JWT'
 pubDate: 2019/03/26 9:20
 author: "Valerio Como"
 tags:
