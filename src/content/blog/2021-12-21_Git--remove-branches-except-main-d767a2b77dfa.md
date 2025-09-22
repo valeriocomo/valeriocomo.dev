@@ -1,5 +1,5 @@
 ---
-title: 'Git: remove branches except main'
+title: "Git: remove branches except main"
 pubDate: 2023/02/11 9:20
 author: "Valerio Como"
 tags:

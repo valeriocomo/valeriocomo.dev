@@ -1,5 +1,5 @@
 ---
-title:  'Throwback to 2016: programmazione come latino, storia e matematica'
+title: "Throwback to 2016: programmazione come latino, storia e matematica"
 pubDate: 2019/05/04 9:20
 author: "Valerio Como"
 tags:
