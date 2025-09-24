@@ -13,7 +13,7 @@ description: Coding & STEM in mio un blog post del 2016
 
 #### Coding & STEM in mio un blog post del 2016
 
-![](https://cdn-images-1.medium.com/max/2560/1*20mjicvau_R2_xg1AsLNFg.jpeg)
+![](../../assets/blog/2019-05-04-throwback-to-2016/cover.jpg)
 
 Foto di JACQUELYN MARTIN/AP
 
