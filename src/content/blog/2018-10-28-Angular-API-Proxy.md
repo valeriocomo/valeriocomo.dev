@@ -13,7 +13,7 @@ description: Bye bye CORS
 
 #### Bye bye CORS
 
-![](https://cdn-images-1.medium.com/max/800/1*I4s1WLyaaSyv-cdwYoBOeg.jpeg)
+![](../../assets/blog/2018-10-28-angular-api-proxy/cover.jpg)
 
 Lavorare allo sviluppo di una applicazione Angular implica l’utilizzo di un web server di sviluppo. Come ogni Web Application, una Single Page Application Angular (SPA) effettua richieste HTTP ad un API server. Durante la fase di sviluppo, una Web Application Angular è servita da un web server che, di default, è in ascolto su porta *4200*. Contestualmente, il backend server è in ascolto su una porta differente; ad esempio sulla porta *80*, piuttosto che sulla porta *3000*.
 
@@ -33,7 +33,7 @@ Supponiamo che la SPA venga servita da un server sulla porta 4200 e che il serve
 
 Se il client effettuasse una richiesta HTTP senza aver configurato il proxy o i CORS, il browser negherebbe la possibilità di raggiungere il server.
 
-![](https://cdn-images-1.medium.com/max/800/1*rsn-un5Q0WQd8sRnA7tplA.png)
+![](../../assets/blog/2018-10-28-angular-api-proxy/image1.png)
 
 Figura 1: CORS abilitate
 
@@ -43,7 +43,7 @@ Configuriamo correttamente il proxy, delegando DevServer a fare da tramite tra a
 
 In pratica, la chiamata è effettuata sullo stesso dominio della applicazione Angular, ovvero verso DevServer.
 
-![](https://cdn-images-1.medium.com/max/800/1*WHg86nBajROPS4XqUMdmsA.png)
+![](../../assets/blog/2018-10-28-angular-api-proxy/image2.png)
 
 Figura 2: Proxy configurato
 
@@ -53,13 +53,13 @@ La configurazione del proxy per un progetto Angular è molto semplice e compatta
 
 * Creare un file di nome **proxy.conf.json** contenente la configurazione del proxy. Nella cartella root del progetto, eseguire il seguente comando da terminale
 
-```
+```bash
 touch proxy.conf.json
 ```
 
 * Aggiungere la configurazione di base, inserendo l’hostname e la porta sulla quale in backend server è in ascolto
 
-```
+```json
 {  
   "/api": {  
     "target": "http://localhost:8080",  
@@ -70,13 +70,13 @@ touch proxy.conf.json
 
 * Modificare lo script di *start*, affiché il server di sviluppo legga la configurazione del proxy. Aprire il **package.json** e modifica lo script *start*. In alternativa, creare un task ex-novo con la medesima configurazione
 
-```
+```json
 "start": "ng serve --proxy-config proxy.conf.json"
 ```
 
 * Rilanciare il server di sviluppo affinchè vengano considerate le nuove configurazioni
 
-```
+```bash
 npm start
 ```
 
