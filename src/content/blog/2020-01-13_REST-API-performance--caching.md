@@ -14,7 +14,7 @@ description: Implementare una REST API con cache utilizzando ETag e If-None-Matc
 
 #### Implementare una REST API con cache utilizzando ETag e If-None-Match
 
-![](https://cdn-images-1.medium.com/max/2560/1*mTu0-GQ8HdlB55rSGbKF7Q.png)
+![](../../assets/blog/2020-01-13-rest-api-performance-caching/cover.png)
 
 Qualche anno fa scrissi un blog post su come implementare un sistema di caching per una REST API. L'articolo originale è andato perso e lo ripropongo in una versione totalmente rivisitata.
 
@@ -52,7 +52,7 @@ Una *conditional GET* è un tipo di richiesta che ottiene una risposta different
 
 **etag**, abbreviazione di *Entity Tag*,è un *header* allegato ad una risposta ottenuta dal server. Il valore di un *etag* è una stringa, generata come risultato di un *hashing* o di un *fingerprint* della risorsa ottenuta. Questa stringa deve essere memorizzata dal client in relazione alla risorsa e riutilizzata al momento di una successiva richiesta della medesima.
 
-![](https://cdn-images-1.medium.com/max/800/1*_5trzppjDWx_KfCY--EIoA.png)
+![](../../assets/blog/2020-01-13-rest-api-performance-caching/image1.png)
 
 Response header con etag
 
@@ -64,7 +64,7 @@ All’atto di una nuova richiesta, il server effettuerà il match tra il valore 
 
 Se i valori confrontati sono uguali, allora la risorsa non è stata modificata. Il server restituirà una *response* vuota e con stato *304 Not Modified*. Questo status code indica al consumer della API che la risorsa non è stata modificata e che può utilizzare la versione in cache.
 
-![](https://cdn-images-1.medium.com/max/800/1*ZbH8kCn1nM2x0yr1TIJKdA.png)
+![](../../assets/blog/2020-01-13-rest-api-performance-caching/image2.png)
 
 Request header con if-none-match
 
@@ -86,7 +86,7 @@ Il valore contenuto in *if-match* è l’*etag* relativo alla risorsa. All’att
 
 Se i valori confrontati non sono uguali, allora il server restituirà una response con status code *412 Precondition failed*, impedendo l’aggiornamento dello stato della risorsa.
 
-![](https://cdn-images-1.medium.com/max/800/1*2aC4DwhCiQZRYHWDIwUwmw.png)
+![](../../assets/blog/2020-01-13-rest-api-performance-caching/image3.png)
 
 Request header con if-match
 
