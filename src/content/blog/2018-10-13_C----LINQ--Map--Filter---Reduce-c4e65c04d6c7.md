@@ -14,7 +14,7 @@ description: Un semplice utilizzo di LINQ
 
 #### Un semplice utilizzo di LINQ
 
-![](https://cdn-images-1.medium.com/max/800/1*DGHi4uqcInARX4FGPK5ngg.png)
+![](../../assets/blog/2018-10-13-csharp-and-linq/cover.png)
 
 Javascript, Javascript, Javascript. Ormai sono 3 anni che ho a che fare con questo, (a detta di molti) stravagante, linguaggio. Ho iniziato ad utilizzarlo costantemente con l’avvento di *AngularJS*. Negli ultimi due anni ho lavorato ad progetto molto vasto, la cui *Single Page Application* é scritta in *Typescript*.
 
@@ -22,7 +22,7 @@ Lavorare con JavaScript mi ha spinto, laddove possibile, ad adottare uno stile d
 
 Javascript mette a disposizioni le funzioni *map*, *reduce* e *filter* per effettuare operazioni sui dati di un array. Per spiegare il funzionamento di questi tre metodi basta guardare la seguente immagine.
 
-![](https://cdn-images-1.medium.com/max/800/1*eZ_oAUS_Sp1plcmXJB8VPg.jpeg)
+![](../../assets/blog/2018-10-13-csharp-and-linq/image1.png)
 
 Una spiegazione illustrata di Map, Filter e Reduce
 
