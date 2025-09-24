@@ -14,13 +14,13 @@ description: Come gestire l'autenticazione attraverso Json Web Token
 
 #### Come gestire l'autenticazione attraverso Json Web Token
 
-![](https://cdn-images-1.medium.com/max/800/1*sXUgsrFKiOc1S6iC7OiouQ.png)
+![](../../assets/blog/2019-03-26-angular-authentication-http-interceptor-jwt/cover.png)
 
 Nei mesi passati ho lavorato allo sviluppo di un piccolo gestionale. Era un progetto *greenfield* e il team di sviluppo ha potuto scegliere la tecnologia da utilizzare. Questa applicazione web è stata sviluppata con Angular ed utilizza un API server implementato con *Laravel*.
 
 Il team ha deciso di adottare lo standard *Json Web Token* ([JWT](https://en.wikipedia.org/wiki/JSON_Web_Token)) per gestire l’autenticazione, anche perchè Laravel rende l’integrazione davvero semplice utilizzando il package *Passport*.
 
-![](https://cdn-images-1.medium.com/max/800/1*EfbW7r7CAoXOmuQsHHYnuA.jpeg)
+![](../../assets/blog/2019-03-26-angular-authentication-http-interceptor-jwt/image1.png)
 
 Carlo Lucarelli
 
@@ -36,7 +36,7 @@ O forse un altro blog post dedicato a Laravel e a Passport.
 
 Per gestire JWT in Angular è stata utilizzata la libreria sviluppata da [*Auth0*](https://auth0.com/)*,* installabile eseguendo il seguente comando:
 
-```
+```bash
 npm i --save @auth0/angular-jwt
 ```
 
@@ -57,7 +57,7 @@ La soluzione che fa per noi ce la propone Angular e corrisponde ad una sua featu
 
 ### Http Interceptor
 
-*HttpInterceptor* è una funzionalità che fa parte del package *HttpClient*. Se vuoi approfondire il funzionamento degli interceptor, ti consiglio di dare uno sguardo al mio blog [post](https://medium.com/@valeriocomo/angular-http-interceptor-417ffda5f2e6).
+*HttpInterceptor* è una funzionalità che fa parte del package *HttpClient*. Se vuoi approfondire il funzionamento degli interceptor, ti consiglio di dare uno sguardo al mio blog [post](/blog/2019-03-20-angular-http-interceptor).
 
 #### **Token Interceptor**
 

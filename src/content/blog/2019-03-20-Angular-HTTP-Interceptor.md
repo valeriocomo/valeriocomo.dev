@@ -13,7 +13,7 @@ description: Come intercettare richieste e risposte HTTP
 
 #### Come intercettare richieste e risposte HTTP
 
-![](https://cdn-images-1.medium.com/max/800/1*ViY3akYnoJ6x7CxoXJIDWw.png)
+![](../../assets/blog/2019-03-20-angular-http-interceptor/cover.png)
 
 Angular è un framework in costante evoluzione e, con ogni versione rilasciata, nuove feature sono messe a disposizione degli sviluppatori.
 
@@ -23,29 +23,20 @@ Sin dagli albori, come ogni web framework, Angular ha un package per la gestione
 
 Per creare un interceptor in Angular è necessario definire un servizio che implementa l’interfaccia *HttpInterceptor*, importandola da *@angular/common/http.* La classe implementerà il metodo *intercept*, che verrà invocato per intercettare una richiesta o una risposta HTTP.
 
-```
+```typescript
 import {     
     HttpEvent,   
     HttpInterceptor,   
     HttpHandler,   
     HttpRequest   
 } from '@angular/common/http';
-```
-
-```
 import { Observable } from 'rxjs';
-```
 
-```
 export class FakeInterceptor implements HttpInterceptor {
-```
 
-```
     intercept(req: HttpRequest<any>, next: HttpHandler)  
               :Observable<HttpEvent<any>> {
-```
 
-```
                console.log(new Date());  
                return next.handle(req);     
            }  
@@ -70,7 +61,7 @@ Come per ogni altro servizio in Angular, é necessario definire un provider per 
 
 Un esempio di providing è il seguente:
 
-```
+```typescript
 {   
     provide: HTTP_INTERCEPTORS,   
     useClass: FakeInterceptor,   
