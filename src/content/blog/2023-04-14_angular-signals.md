@@ -13,7 +13,7 @@ description: A new reactive primitive
 
 #### A new reactive primitive
 
-![](https://cdn-images-1.medium.com/max/800/0*51tQDG4IsFQtVJeY)
+![](../../assets/blog/2023-04-14-angular-signals/cover.jpg)
 
 Photo by [Carlos Alberto Gómez Iñiguez](https://unsplash.com/@iniguez?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral)
 
@@ -27,7 +27,7 @@ The answer is simple: **no**.
 
 *Signals* provide a straightforward approach to solve a similar problem. Take a look at this simple example.
 
-![](https://cdn-images-1.medium.com/max/800/1*CAB2fLcvI1WY1bON4vGJGQ.png)
+![](../../assets/blog/2023-04-14-angular-signals/image1.png)
 
 In this example, we have two variables: *number* and *squared*.
 
