@@ -14,14 +14,14 @@ description: Containerization for automation of a project setup process
 
 #### Containerization for automation of a project setup process
 
-![](https://cdn-images-1.medium.com/max/800/1*h5_v4WXnmjrxO9hy96whDQ.jpeg)
+![](../../assets/blog/2023-05-03-vscode-dev-containers/cover.jpg)
 
 ### Prologue
 
 I get through a lot of projects everyday. Sometimes based on the same stack, sometimes on different technologies. At worst, projects are so dated in time that it is difficult to set it up on your PC.   
 Whenever a colleague joins a project, solution setup takes up much of the time of the onboarding process.
 
-![](https://cdn-images-1.medium.com/max/800/0*GCqY8znbfkRyz_-c)
+![](../../assets/blog/2023-05-03-vscode-dev-containers/image1.png)
 
 Me at the end of an onboarding setup
 
@@ -33,7 +33,7 @@ Setting up a pc for a project is a process that has varying degrees of complexit
 
 Developers could connect to a remote machine, container, or development environment and use VSCode to edit files, run and debug code, and perform other development tasks as if you were working locally.
 
-![](https://cdn-images-1.medium.com/max/800/0*DWEdd-6m6tAGOoJt.png)
+![](../../assets/blog/2023-05-03-vscode-dev-containers/image2.png)
 
 VSCode Remote Development architecture from [official documentation](https://code.visualstudio.com/docs/remote/remote-overview).
 
@@ -51,7 +51,7 @@ In the last 10 years, the popularity of containers has grown tremendously in the
 
 A *Dev Container* is essentially a preconfigured development environment packaged in a Docker container. It has all the tools and dependencies required to develop a particular application. Developers can easily set up a consistent and isolated development environment, hypothetically identical to the production environment.
 
-![](https://cdn-images-1.medium.com/max/800/0*lPvRp6Tou7o4WGeF.png)
+![](../../assets/blog/2023-05-03-vscode-dev-containers/image3.png)
 
 Architecture of Dev Containers from [official documentation](https://code.visualstudio.com/docs/devcontainers/containers)
 
@@ -70,37 +70,37 @@ VSCode provides a simple and effective way to use Dev Containers. The process in
 
 1. Just press *CMD + Shift + P* on MacOS or *CTRL + Shift + P* and just enter a search term at the prompt, as showed in the next image.
 
-![](https://cdn-images-1.medium.com/max/800/1*wC7nYXnz8ixwWtSmHnVSGQ.png)
+![](../../assets/blog/2023-05-03-vscode-dev-containers/image4.png)
 
 Create a configuration for a Dev Container
 
 2. VSCode will show up a list of preset configuration.
 
-![](https://cdn-images-1.medium.com/max/800/1*nQCJFVExaYfvyImR8oCLNQ.png)
+![](../../assets/blog/2023-05-03-vscode-dev-containers/image5.png)
 
 Select a preset image
 
 3. After a selection, you may be prompted by VSCode in order to customize your dev container’s configuration. Personal tip: if you work with *Apple ARM* architecture, remember to select *bullseye* version of Debian images.
 
-![](https://cdn-images-1.medium.com/max/800/1*slDR6ysKs749Ny17XO2GPQ.png)
+![](../../assets/blog/2023-05-03-vscode-dev-containers/image6.png)
 
 Choose the version and other configurations
 
 4. VSCode will create a folder and at least a configuration file within it, *devcontainer.json*. This file is a descriptor for a Dev Container.
 
-![](https://cdn-images-1.medium.com/max/800/1*9NMQ1_lh0jWvqO3ZJnHY8g.png)
+![](../../assets/blog/2023-05-03-vscode-dev-containers/image7.png)
 
 A basic VSCode configuration
 
 5. Click on **Reopen in Container** on the right side popup. Otherwise, you could use a top menu.
 
-![](https://cdn-images-1.medium.com/max/800/1*DIiMyE60z3glpCmNiw7dow.png)
+![](../../assets/blog/2023-05-03-vscode-dev-containers/image8.png)
 
 Run a Dev Container
 
 6. VSCode will eventually create a container and it will run it.
 
-![](https://cdn-images-1.medium.com/max/800/1*KKg1-B0ZjHPrjUBEftvwKA.png)
+![](../../assets/blog/2023-05-03-vscode-dev-containers/image9.png)
 
 A Dev Container for C# 7
 
