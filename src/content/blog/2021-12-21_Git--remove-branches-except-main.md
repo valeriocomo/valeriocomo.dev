@@ -12,7 +12,7 @@ description: Keep your git repo clean
 
 #### Keep your git repo clean
 
-![](https://cdn-images-1.medium.com/max/2560/1*NZgI18Ud1RoDcu9MTts9Aw.png)
+![](../../assets/blog/2021-12-21-git-remove-branches-except-main/cover.png)
 
 ### TL;DR
 
