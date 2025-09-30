@@ -11,6 +11,8 @@ description: WASM 3 is here
 ### Web Assembly 3.0
 #### WASM 3 is here
 
+![](../../assets/blog/2025-09-23-webassembly-3/cover.png)
+
 Three years after the Wasm 2.0 standard was finalized, the Wasm W3C Community and Working Groups have officially released Wasm 3.0, establishing it as the new "live" standard. This isn't a minor patch - it's a massive update that delivers several big features, some of which have been six to eight years in the making.
 
 ### New Features
