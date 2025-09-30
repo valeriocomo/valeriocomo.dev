@@ -1,10 +1,9 @@
 ---
 title: Web Assembly 3.0
-pubDate: 2025/02/17 9:20
+pubDate: 2025/09/23 9:20
 author: "Valerio Como"
 tags:
-  - Docker
-  - DockerImage
+  - webassembly
 imgUrl: '../../assets/blog/2025-09-23-webassembly-3/cover.png'
 description: WASM 3 is here
 ---
