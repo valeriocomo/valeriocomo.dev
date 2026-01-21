@@ -1,19 +1,23 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '@layouts/Default.astro';
-import BlogList from '@components/blog/BlogList.astro';
+import BlogList from "@components/blog/BlogList.astro";
+import Layout from "@layouts/Default.astro";
+import { getCollection } from "astro:content";
 
-const posts = await getCollection('blog').then((collection) =>
-  collection.reverse()
+const posts = await getCollection("blog").then((collection) =>
+  collection
+    .filter(({ data: { pubDate } }) => pubDate.getTime() <= Date.now())
+    .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()),
 );
 ---
 
 <Layout
-  title='Blog'
-  description=`Valerio Como's Blog | On this page you can find a collection of blogposts``
-  pageTitle=`Valerio Como's Blog``
+  title="Blog"
+  description=`Valerio Como's Blog | On this page you can find a collection of blogposts`
+  `
+  pageTitle=`Valerio Como's Blog`
+  `
 >
-  <main class='bg-green p-6'>
+  <main class="bg-green p-6">
     <BlogList posts={posts} />
   </main>
 </Layout>

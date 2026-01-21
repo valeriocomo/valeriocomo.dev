@@ -1,0 +1,110 @@
+---
+title: Create more time
+pubDate: 2023/05/23 9:20
+author: "Valerio Como"
+tags:
+  - TimeManagement
+  - Productivity
+  - StolenFocus
+imgUrl: '../../assets/blog/2023-05-23-create-more-time/cover.jpg'
+description: 10 tips on how to focus on what matter
+---
+
+### Create more time
+
+#### 10 tips on how to focus on what matter
+
+![](../../assets/blog/2023-05-23-create-more-time/cover.jpg)
+
+Photo by [Djim Loic](https://unsplash.com/@loic?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral)
+
+*Make Time* (buy it from those links [IT](https://amzn.to/41TkX3s), [UK](https://amzn.to/41TmrL4)) is one of the best book I have read last year. Written by [Jake Knapp](https://medium.com/u/f230699aec44) and [John Zeratsky](https://medium.com/u/ed1df3d97a1b), it’s a collection of tips, tactics and strategy on how to focus on your daily goals.
+
+### Intro
+
+*Make Time* starts from the concept that most of our time is spent by *default*. What’s a *default*? It’s an action or an habit that we do without even thinking. It’s what you get or do when you don’t have a selected option.
+
+*defaults* are set by society or by our workplace. It’s something related not only on you but it could be related with our culture.
+
+I could mention a long list of this actions. For example, if you were on a bus you may check notifications on your phone or check out your social media every morning while you are drinking your coffee.
+
+Some of this actions dive you into *Infinity Pools*. I don’t intend to spend time about this concept but I give you some example. Facebook, Youtube, Instagram, TikTok are all *Infinity Pools*. They lead you to **endless distraction**, scrolling your smartphone’ screen without a meaningful goal.
+
+### An effective framework
+
+Starting from this point, *Make Time* describes a framework, split in 4 phases, to keep you up focus to your goals. The authors describe tips and tactics for every phases.
+
+![](../../assets/blog/2023-05-23-create-more-time/image1.png)
+
+How Make Time works. [Credits](https://maketime.blog/).
+
+#### Highlight
+
+> Start each day by choosing a focal point
+
+In simple way, you have to choose a single activity and you stay focus on it. You have to give the highest priority and you have to stay focus on it.
+
+#### Laser
+
+> Beat distraction to make time for your Highlight
+
+Setting up a distraction-free environment, avoiding your technology distracts you with notifications, social media endless scrolling or a meaningless breaking news. You have to find the shortest path to get easily *in the zone*.
+
+#### Energize
+
+> Take care of your body to recharge your brain
+
+Our brain is not relentless and tireless. We have to focus out from our tasks. Like a smartphone or a laptop, we need to recharge our battery. Sleep, food, exercise, meditation are essential practices in order to avoid burnouts and keep ourselves effective.
+
+#### Reflect
+
+> Adjust and improve your system every day
+
+Simply check what works and what doesn’t for your. Think back at your day and refine your strategies. If your are a software developer and you are into Agile Methodologies this concept would sound familiar.
+
+### My top 10 tips list
+
+I strongly recommend to read the book. Otherwise, those are my favorite tactics.
+
+#### Highlight tactics
+
+**Write It down:** Write down your highlight. It looks simple but things are more likely to happen.
+
+**Design your day:** Plan every tasks of your day in your calendar. Even breaks and coffees. It will lead you to think about *how* to do the next task to do instead of asking *what* to do.
+
+#### Laser tactics
+
+**Try a Distraction-Free Phone:** Your phone is the first source of distraction. You have to neutralize this menace. How to do it? You should change something about your habits and it might not be easy. Here’s some short tips:
+
+* Uninstall social media apps
+* Uninstall *Infinite Pools* apps
+* Unlink your email account from your smartphone
+* Remove the web browser
+
+Some of them sounds really radical? I agree with you.
+
+**Skip the morning Check-in:** Avoid to use your smartphone right after you waking up. Don’t expose your rested brain to useless inputs. Postpone this activity later.
+
+**Don’t watch the news:** Instead of expose your self to an endless loop of ads and repetitive stories, you should read news once a week. Believe me, it’s an incredible relief.
+
+#### Energize tactics
+
+**Exercise every day**: The title it’s self-explanatory. Do exercise for a certain amount of time, every day, at your best in that moment.
+
+**Wake up before you caffeinate**: Don’t get caffeine if you aren’t full awake. Drink a coffee right after you wake up looks like a good habit but it isn’t. It’s a cortisol related affair. In the morning, your body produces a lot of cortisol and, you caffeine couldn’t give you a boost. You may have your first coffee after 9:30 AM. (I prefer at 10:00 AM).
+
+**Trick your self into meditating**: Meditation benefits are well know. It helps your brain **resting** and, at same time, **exercising**. Studies have revealed that meditation represents to brain what exercise is to the body. It helps you to stay focus and, even more surprising, it changes physically some area of your brain.
+
+**Make your bedroom a bed room**: Take all electronic devices out of your bed room, TVs and Smartphone above all. Avoid flooding your brain with useless input come out of social media and *Infinite Pools*. Reading in the bed, even with a Kindle, is a good way of winding down. Don’t use your smartphone if you need an alarm. Instead of using your smartphone, you better to buy a mono-purpose alarm device.
+
+**Fake the sunset**: This is one of my fav tactics. *Fake the sunset* aims in reducing bright lights exposure during the last part of the day. You should enable night mode on your devices and use dim lights at least a couple of hours before bedtime. The functioning of our brain is closely related to light. If the sun is up (the light is on), then it awakes you. It’s an ancestral automatism.
+
+### Conclusion
+
+That’s my 10 tips list. It’s a short and some those tips fit into my own daily routine. Some of them are harder to adopt and I don’t use them.
+
+What are the best tactics for you? The ones that fits best for you. Easy. It’s on you to figure out what tactics could improve your time management.
+
+I’d like to suggest to stay consistent. You should adopt your best-fit tactics everyday. If you don’t feel comfortable, inspect and adapt. Keep aside uncomfortable tactics and keep what it’s working for you.
+
+It’s not easy but if your are here and you still reading this post you have an hidden motivation waiting to come up.

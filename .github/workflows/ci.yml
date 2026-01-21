@@ -1,0 +1,35 @@
+name: ci
+
+permissions:
+    pull-requests: write
+    contents: write
+
+on:
+    pull_request:
+        types: [opened, synchronize, reopened]
+
+jobs:
+    upgrade:
+        runs-on: ubuntu-latest
+        env:
+            NODE_OPTIONS: "--max_old_space_size=4096"
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v6
+
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 9.0.0
+
+            - name: Setup Node
+              uses: actions/setup-node@v6
+              with:
+                  node-version: 22
+                  cache: pnpm
+
+            - name: Install dependencies
+              run: pnpm install
+
+            - name: Build astro project
+              run: pnpm build

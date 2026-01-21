@@ -2,19 +2,20 @@ name: nightly
 
 permissions:
   pull-requests: write
+  contents: write
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * *"
 
 jobs:
   upgrade:
     runs-on: ubuntu-latest
     env:
-      NODE_OPTIONS: '--max_old_space_size=4096'
+      NODE_OPTIONS: "--max_old_space_size=4096"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -22,7 +23,7 @@ jobs:
           version: 9.0.0
 
       - name: Setup Node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: pnpm
@@ -34,11 +35,11 @@ jobs:
         run: pnpm dlx @astrojs/upgrade --yes
 
       - name: PR Changes
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           branch: ci/update-astro
-          commit-message: 'ci: update Astro'
+          commit-message: "ci: update Astro"
           assignees: valeriocomo
-          title: 'ci: update Astro'
+          title: "ci: update Astro"
           body: Update Astro and packages to latest version
           labels: ci
