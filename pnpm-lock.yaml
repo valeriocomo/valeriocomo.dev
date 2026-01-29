@@ -52,8 +52,8 @@ importers:
         specifier: ^7.18.0
         version: 7.18.0(eslint@8.56.0)(typescript@5.8.3)
       '@unocss/reset':
-        specifier: ^0.57.7
-        version: 0.57.7
+        specifier: ^66.6.0
+        version: 66.6.0
       eslint:
         specifier: ^8.56.0
         version: 8.56.0
@@ -987,9 +987,6 @@ packages:
 
   '@unocss/preset-wind@66.6.0':
     resolution: {integrity: sha512-6uVq3/gV1MD9ZsycrYLP6OvAS9kI1oGAIuccKKspZHW3jqwEhJmPofDD4pYwbkx4i4zSWzoLakcfp9d67Szjqg==}
-
-  '@unocss/reset@0.57.7':
-    resolution: {integrity: sha512-oN9024WVrMewGbornnAPIpzHeKPIfVmZ5IsZGilWR761TnI5jTjHUkswsVoFx7tZdpCN2/bqS3JK/Ah0aot3NQ==}
 
   '@unocss/reset@66.6.0':
     resolution: {integrity: sha512-OQK5F7Dzx0wWDSPTYEz7NRP9pekufSAkjxfKOyKokiXOUzVTg8Yx8sOvCsA3Oi0Rx5WlsO2LN+MOBekpkrttXg==}
@@ -4094,8 +4091,6 @@ snapshots:
     dependencies:
       '@unocss/core': 66.6.0
       '@unocss/preset-wind3': 66.6.0
-
-  '@unocss/reset@0.57.7': {}
 
   '@unocss/reset@66.6.0': {}
 
