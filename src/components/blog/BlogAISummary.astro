@@ -7,7 +7,7 @@
     <button id="summarize-btn" class="px-4 py-2 bg-blue-500 text-white rounded"
         >Summarize with AI</button
     >
-    <div id="summary-result" class="mt-4 p-4 bg-gray-100 rounded"></div>
+    <div id="summary-result" class="mt-4 p-4 bg-gray-100 rounded hidden"></div>
 </div>
 
 <script>
@@ -79,6 +79,9 @@
             if (summaryResultElement) {
                 summaryResultElement.textContent = ""; // Clear previous summary
                 for await (const chunk of summary) {
+                    if (!summaryResultElement.textContent) {
+                        summaryResultElement.classList.remove("hidden"); // Show the summary container
+                    }
                     summaryResultElement.append(chunk);
                 }
             }
