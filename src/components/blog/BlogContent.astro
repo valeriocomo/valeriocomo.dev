@@ -1,4 +1,6 @@
 ---
+import BlogAISummary from "./BlogAISummary.astro";
+
 interface Props {
   pubDate: Date;
   author: string;
@@ -18,55 +20,8 @@ const { pubDate, author, title, description, coverImage } = Astro.props;
   <h3>{title}</h3>
   <h4>{description}</h4>
   {coverImage && <img src={coverImage} alt={title} class="w-full h-auto" />}
-  <h1>my widget</h1>
+  <BlogAISummary />
   <slot />
   <p class="text-slate">Written by {author}</p>
   <a href="/blog/" title="Back to blog">&larr; Back to blog</a>
 </article>
-
-<script>
-  function getSlotContent() {
-    const slotContainer = document.querySelector("article");
-
-    // Ottieni HTML
-    const htmlContent = slotContainer?.innerHTML;
-
-    // Ottieni solo testo
-    const textContent = slotContainer?.textContent;
-
-    // Oppure l'intero elemento
-    const element = slotContainer;
-
-    return { htmlContent, textContent, element };
-  }
-
-  // Esempio d'uso
-  document.addEventListener("DOMContentLoaded", async () => {
-    const content = getSlotContent();
-    if ("Summarizer" in self) {
-      const options = {
-        type: "key-points",
-        length: "medium",
-        outputLanguage: "en",
-      };
-      const available = await Summarizer.availability();
-      console.log("Summarizer available:", available);
-      const summarizer = await Summarizer.create({
-        ...options,
-        monitor(m) {
-          m.addEventListener("downloadprogress", (e) => {
-            console.log(`Downloaded ${e.loaded * 100}%`);
-          });
-        },
-      });
-
-      const summary = await summarizer.summarize(content.textContent);
-      console.log("Summary:", summary);
-    } else {
-      console.warn("Summarizer API is not available in this environment.");
-    }
-    console.log("Contenuto dello slot:", content);
-
-    // Fai qualcosa con il contenuto...
-  });
-</script>

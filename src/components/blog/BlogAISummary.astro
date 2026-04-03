@@ -1,0 +1,81 @@
+---
+
+---
+
+<div id="summary-ai-widget" class="my-8 p-6 border rounded bg-white shadow">
+    <h3>Generate a TL;DR with Built-in AI APIs</h3>
+    <button id="summarize-btn" class="px-4 py-2 bg-blue-500 text-white rounded"
+        >Summarize with AI</button
+    >
+    <div id="summary-result" class="mt-4 p-4 bg-gray-100 rounded"></div>
+</div>
+
+<script>
+    function getSlotContent() {
+        const slotContainer = document.querySelector("article");
+
+        // Ottieni HTML
+        const htmlContent = slotContainer?.innerHTML;
+
+        // Ottieni solo testo
+        const textContent = slotContainer?.textContent;
+
+        // Oppure l'intero elemento
+        const element = slotContainer;
+
+        return { htmlContent, textContent, element };
+    }
+
+    document
+        .getElementById("summarize-btn")
+        ?.addEventListener("click", async () => {
+            if ("Summarizer" in self) {
+                const content = getSlotContent();
+
+                const options = {
+                    type: "tldr",
+                    length: "long",
+                    outputLanguage: "en",
+                };
+
+                const available = await Summarizer.availability(options);
+
+                if (available === "unavailable") {
+                    console.warn(
+                        "Summarizer API is unavailable in this environment.",
+                    );
+                    return;
+                }
+
+                console.log("Summarizer available:", available);
+
+                const summarizer = await Summarizer.create({
+                    ...options,
+                    monitor(m) {
+                        m.addEventListener("downloadprogress", (e) => {
+                            console.log(`Downloaded ${e.loaded * 100}%`);
+                        });
+                    },
+                });
+                const summaryResultElement =
+                    document.getElementById("summary-result");
+                const summary = await summarizer.summarizeStreaming(
+                    content.textContent,
+                    {
+                        context:
+                            "This article is intended for software developers.",
+                    },
+                );
+                console.log("Summary:", summary);
+                if (summaryResultElement) {
+                    for await (const chunk of summary) {
+                        summaryResultElement.append(chunk);
+                    }
+                }
+            } else {
+                console.warn(
+                    "Summarizer API is not available in this environment.",
+                );
+            }
+        });
+</script>
