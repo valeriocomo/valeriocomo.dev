@@ -2,7 +2,7 @@
 
 ---
 
-<div id="summary-ai-widget" class="my-8 p-6 border rounded bg-white shadow">
+<div id="summary-ai-widget" class="my-8 p-6 border rounded bg-white shadow hidden">
     <h3>Generate a TL;DR with Google Chrome Built-in AI APIs</h3>
     <button
         id="summarize-btn"
@@ -14,6 +14,13 @@
         <span id="summarize-btn-label">Summarize with AI</span>
     </button>
     <div id="summary-result" class="mt-4 p-4 bg-gray-100 rounded hidden"></div>
+</div>
+
+<div id="summary-ai-chrome-hint" class="hidden my-8 p-6 border rounded bg-white shadow">
+    <p class="text-sm text-gray-500">
+        <span class="i-logos-chrome inline-block align-middle mr-1"></span>
+        Want an AI-generated TL;DR? Open this page in <a href="https://www.google.com/chrome/" target="_blank" rel="noopener" class="text-blue-500 underline">Google Chrome</a> to try the built-in AI summarization feature.
+    </p>
 </div>
 
 <script>
@@ -32,6 +39,15 @@
         return { htmlContent, textContent, element };
     }
 
+    const widget = document.getElementById("summary-ai-widget");
+    const hint = document.getElementById("summary-ai-chrome-hint");
+
+    if ("Summarizer" in self) {
+        widget?.classList.remove("hidden");
+    } else {
+        hint?.classList.remove("hidden");
+    }
+
     const btn = document.getElementById(
         "summarize-btn",
     ) as HTMLButtonElement | null;
@@ -44,15 +60,6 @@
     }
 
     btn?.addEventListener("click", async () => {
-        const isSummarizerAvailable = "Summarizer" in self;
-
-        if (!isSummarizerAvailable) {
-            console.warn(
-                "Summarizer API is not available in this environment.",
-            );
-            return;
-        }
-
         setLoading(true);
 
         const options = {
