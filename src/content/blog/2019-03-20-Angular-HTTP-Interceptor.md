@@ -9,12 +9,6 @@ imgUrl: '../../assets/blog/2019-03-20-angular-http-interceptor/cover.png'
 description: Come intercettare richieste e risposte HTTP
 ---
 
-### Angular HTTP Interceptor
-
-#### Come intercettare richieste e risposte HTTP
-
-![](../../assets/blog/2019-03-20-angular-http-interceptor/cover.png)
-
 Angular è un framework in costante evoluzione e, con ogni versione rilasciata, nuove feature sono messe a disposizione degli sviluppatori.
 
 Sin dagli albori, come ogni web framework, Angular ha un package per la gestione delle richieste Http. La versione 4.3 ha introdotto il package *HttpClient*, deprecando *Http*. Con *HttpClient* sono stati introdotti gli **HTTP Interceptor,** che consentonodi intercettare le *response* e le *request* delle chiamate HTTP effettuate dalla *Single Page Application*. Il funzionamento di un interceptor è del tutto comparabile ad un route middleware di un qualsiasi web framework, come [Slim](http://www.slimframework.com/) oppure [Express](https://expressjs.com/).

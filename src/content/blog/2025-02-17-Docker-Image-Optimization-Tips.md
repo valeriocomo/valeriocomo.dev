@@ -9,13 +9,6 @@ imgUrl: '../../assets/blog/2025-02-17-docker-image-optimizaiton-tips/cover.png'
 description: How to reduce the size of the docker image up to 10x
 ---
 
-
-### Docker Image Optimization Tips
-
-#### How to reduce the size of the docker image up to 10x
-
-![](https://cdn-images-1.medium.com/max/2560/1*9Krc-TCmjVWBu5Znn14mCQ.png)
-
 This is a post of a series about Docker Image Optimizations. This series is composed by the following post:
 
 * Docker Image Optimization Tips (**this post!**)

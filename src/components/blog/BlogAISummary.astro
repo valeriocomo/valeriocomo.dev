@@ -1,0 +1,138 @@
+---
+
+---
+
+<div
+    id="summary-ai-widget"
+    class="my-8 p-6 border rounded bg-white shadow hidden"
+>
+    <h3>Generate a TL;DR with Google Chrome Built-in AI APIs</h3>
+    <button
+        id="summarize-btn"
+        class="px-4 py-2 bg-blue-500 text-white rounded flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+        <span
+            id="summarize-btn-spinner"
+            class="hidden animate-spin i-uil-spinner"></span>
+        <span id="summarize-btn-label">Summarize with AI</span>
+    </button>
+    <div id="summary-result" class="mt-4 p-4 bg-gray-100 rounded hidden"></div>
+</div>
+
+<div
+    id="summary-ai-chrome-hint"
+    class="hidden my-8 p-6 border rounded bg-white shadow"
+>
+    <p class="text-sm text-gray-500">
+        <span class="i-logos-chrome inline-block align-middle mr-1"></span>
+        Want an AI-generated TL;DR? Open this page in <a
+            href="https://www.google.com/chrome/"
+            target="_blank"
+            rel="noopener"
+            class="text-blue-500 underline">Google Chrome</a
+        > to try the built-in AI summarization feature.
+    </p>
+    <p class="text-sm text-gray-500">
+        Are you a coding nerd? Check out this <a
+            href="https://aleromano.com/posts/built-in-browser-ai"
+            target="_blank"
+            class="text-blue-500 underline">blog post</a
+        >;
+    </p>
+</div>
+
+<script>
+    function getSlotContent() {
+        const slotContainer = document.querySelector("article");
+
+        // Ottieni HTML
+        const htmlContent = slotContainer?.innerHTML;
+
+        // Ottieni solo testo
+        const textContent = slotContainer?.textContent;
+
+        // Oppure l'intero elemento
+        const element = slotContainer;
+
+        return { htmlContent, textContent, element };
+    }
+
+    const widget = document.getElementById("summary-ai-widget");
+    const hint = document.getElementById("summary-ai-chrome-hint");
+
+    if ("Summarizer" in self) {
+        widget?.classList.remove("hidden");
+    } else {
+        hint?.classList.remove("hidden");
+    }
+
+    const btn = document.getElementById(
+        "summarize-btn",
+    ) as HTMLButtonElement | null;
+    const spinner = document.getElementById("summarize-btn-spinner");
+
+    function setLoading(loading: boolean) {
+        if (!btn || !spinner) return;
+        btn.disabled = loading;
+        spinner.classList.toggle("hidden", !loading);
+    }
+
+    btn?.addEventListener("click", async () => {
+        setLoading(true);
+
+        const options = {
+            type: "tldr",
+            length: "long",
+            format: "plain-text",
+            outputLanguage: "en",
+        } satisfies SummarizerCreateCoreOptions;
+
+        const available = await Summarizer.availability(options);
+
+        if (available === "unavailable") {
+            console.warn("Summarizer API is unavailable in this environment.");
+            setLoading(false);
+            return;
+        }
+
+        console.log("Summarizer available:", available);
+
+        const summarizer = await Summarizer.create({
+            ...options,
+            monitor(m) {
+                m.addEventListener("downloadprogress", (e) => {
+                    console.log(`Downloaded ${e.loaded * 100}%`);
+                });
+            },
+        });
+
+        const content = getSlotContent();
+
+        if (!content.textContent) {
+            console.warn("No text content found to summarize.");
+            setLoading(false);
+            return;
+        }
+
+        const summary = await summarizer.summarizeStreaming(
+            content.textContent,
+            {
+                context: "This article is intended for software developers.",
+            },
+        );
+        const summaryResultElement = document.getElementById("summary-result");
+
+        if (summaryResultElement) {
+            summaryResultElement.textContent = ""; // Clear previous summary
+
+            for await (const chunk of summary) {
+                if (!summaryResultElement.textContent) {
+                    summaryResultElement.classList.remove("hidden"); // Show the summary container
+                }
+                summaryResultElement.append(chunk);
+            }
+        }
+
+        setLoading(false);
+    });
+</script>

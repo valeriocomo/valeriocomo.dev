@@ -12,9 +12,10 @@ interface Props {
   headings: unknown;
   description: string;
   title: string;
+  imgUrl?: { src: string };
 }
 
-const { author, pubDate, description, title, headings } = Astro.props;
+const { author, pubDate, description, title, headings, imgUrl } = Astro.props;
 ---
 
 <Layout
@@ -24,7 +25,13 @@ const { author, pubDate, description, title, headings } = Astro.props;
 >
   <main class="p-6 lg:grid lg:grid-cols-3 flex justify-center">
     <BlogSideBar headings={headings as any[]} />
-    <BlogContent {author} {pubDate}>
+    <BlogContent
+      {author}
+      {pubDate}
+      {title}
+      {description}
+      coverImage={imgUrl?.src}
+    >
       <slot />
     </BlogContent>
   </main>

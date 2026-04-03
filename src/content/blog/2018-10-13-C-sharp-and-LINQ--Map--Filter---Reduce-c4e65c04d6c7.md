@@ -10,12 +10,6 @@ imgUrl: '../../assets/blog/2018-10-13-csharp-and-linq/cover.png'
 description: Un semplice utilizzo di LINQ
 ---
 
-### C# & LINQ: Map, Filter & Reduce
-
-#### Un semplice utilizzo di LINQ
-
-![](../../assets/blog/2018-10-13-csharp-and-linq/cover.png)
-
 Javascript, Javascript, Javascript. Ormai sono 3 anni che ho a che fare con questo, (a detta di molti) stravagante, linguaggio. Ho iniziato ad utilizzarlo costantemente con l’avvento di *AngularJS*. Negli ultimi due anni ho lavorato ad progetto molto vasto, la cui *Single Page Application* é scritta in *Typescript*.
 
 Lavorare con JavaScript mi ha spinto, laddove possibile, ad adottare uno stile di programmazione più vicino ai linguaggi funzionali, soprattutto quando devo elaborare i dati di una collection.

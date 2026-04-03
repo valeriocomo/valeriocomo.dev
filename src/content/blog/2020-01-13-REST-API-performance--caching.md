@@ -10,12 +10,6 @@ imgUrl: '../../assets/blog/2020-01-13-rest-api-performance-caching/cover.png'
 description: Implementare una REST API con cache utilizzando ETag e If-None-Match
 ---
 
-### REST API performance: caching
-
-#### Implementare una REST API con cache utilizzando ETag e If-None-Match
-
-![](../../assets/blog/2020-01-13-rest-api-performance-caching/cover.png)
-
 Qualche anno fa scrissi un blog post su come implementare un sistema di caching per una REST API. L'articolo originale è andato perso e lo ripropongo in una versione totalmente rivisitata.
 
 ### Scenario

@@ -23,6 +23,7 @@ const { Content } = await render(blogpost);
   description={blogpost.data.description}
   pubDate={blogpost.data.pubDate}
   author={blogpost.data.author}
+  imgUrl={blogpost.data.imgUrl}
   headings={blogpost.rendered?.metadata?.headings}
 >
   <Content />

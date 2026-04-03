@@ -10,12 +10,6 @@ imgUrl: '../../assets/blog/2019-03-26-angular-authentication-http-interceptor-jw
 description: Come gestire l'autenticazione attraverso Json Web Token
 ---
 
-### Angular Authentication: HttpInterceptor + JWT
-
-#### Come gestire l'autenticazione attraverso Json Web Token
-
-![](../../assets/blog/2019-03-26-angular-authentication-http-interceptor-jwt/cover.png)
-
 Nei mesi passati ho lavorato allo sviluppo di un piccolo gestionale. Era un progetto *greenfield* e il team di sviluppo ha potuto scegliere la tecnologia da utilizzare. Questa applicazione web è stata sviluppata con Angular ed utilizza un API server implementato con *Laravel*.
 
 Il team ha deciso di adottare lo standard *Json Web Token* ([JWT](https://en.wikipedia.org/wiki/JSON_Web_Token)) per gestire l’autenticazione, anche perchè Laravel rende l’integrazione davvero semplice utilizzando il package *Passport*.

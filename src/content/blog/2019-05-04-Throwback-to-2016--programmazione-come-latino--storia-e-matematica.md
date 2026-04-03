@@ -9,14 +9,6 @@ imgUrl: '../../assets/blog/2019-05-04-throwback-to-2016/cover.jpg'
 description: Coding & STEM in mio un blog post del 2016
 ---
 
-### Throwback to 2016: programmazione come latino, storia e matematica
-
-#### Coding & STEM in mio un blog post del 2016
-
-![](../../assets/blog/2019-05-04-throwback-to-2016/cover.jpg)
-
-Foto di JACQUELYN MARTIN/AP
-
 Qualche hanno fa presi parte ad un progetto, attualmente dismesso, chiamato *La Città Vecchia*. Questo contenitore raccoglieva una serie di rubriche (la chiameremmo così se fossimo in una redazione di un giornale) e quella da me curata si chiamava *RAM*, acronimo di *Raccontando Altri Mondi.*
 
 Il me stesso del 2016 scrisse un blog post in merito al **Coding** e alle **STEM**. Vi riporto il testo originale del blog [post](https://lacittavecchia.wordpress.com/2016/02/01/programmazione-come-latino-storia-e-matematica/), intitolato *Programmazione come latino, storia e matematica*.

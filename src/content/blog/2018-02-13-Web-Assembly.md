@@ -9,10 +9,6 @@ imgUrl: '../../assets/blog/2018-02-13-web-assembly/cover.png'
 description: A brief introduction to WebAssembly, starting with a newsletter from Javascript Weekly and ending with features, going through a brief history of web development in recent years
 ---
 
-### Web Assembly
-
-![](../../assets/blog/2018-02-13-web-assembly/cover.png)
-
 Era un caldo pomeriggio di giugno ed il mio smartphone squillò, segnalandomi l’arrivo di una nuova mail. Mi era stata recapitata la JavaScript Weekly, newsletter alla quale ero iscritto da qualche tempo. Come ogni settimana, leggo la mail alla ricerca di qualche accattivante articolo da leggere.
 
 ![](../../assets/blog/2018-02-13-web-assembly/image1.png)
