@@ -10,12 +10,6 @@ imgUrl: '../../assets/blog/2023-05-03-vscode-dev-containers/cover.jpg'
 description: Containerization for automation of a project setup process
 ---
 
-### VSCode Dev Containers
-
-#### Containerization for automation of a project setup process
-
-![](../../assets/blog/2023-05-03-vscode-dev-containers/cover.jpg)
-
 ### Prologue
 
 I get through a lot of projects everyday. Sometimes based on the same stack, sometimes on different technologies. At worst, projects are so dated in time that it is difficult to set it up on your PC.   

@@ -9,12 +9,6 @@ imgUrl: '../../assets/blog/2024-07-22-inheritance-vs-composition/cover.jpg'
 description: PROs and CONs of Inheritance and Composition in Object-Oriented Programming
 ---
 
-### Inheritance vs Composition
-
-#### PROs and CONs of Inheritance and Composition in Object-Oriented Programming
-
-![](https://cdn-images-1.medium.com/max/800/0*BMpF7nqGTca6yFRq.jpg)
-
 Red pill or blue pill?
 
 Throughout my whole career, I debated a lot with my colleagues about what was the best way to share behaviors between classes. Many of them go for the inheritance, others prefer composition. Beyond personal taste, I think it would be better write down few words to clarify these concepts.

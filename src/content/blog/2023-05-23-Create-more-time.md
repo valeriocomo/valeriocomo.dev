@@ -10,14 +10,6 @@ imgUrl: '../../assets/blog/2023-05-23-create-more-time/cover.jpg'
 description: 10 tips on how to focus on what matter
 ---
 
-### Create more time
-
-#### 10 tips on how to focus on what matter
-
-![](../../assets/blog/2023-05-23-create-more-time/cover.jpg)
-
-Photo by [Djim Loic](https://unsplash.com/@loic?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral)
-
 *Make Time* (buy it from those links [IT](https://amzn.to/41TkX3s), [UK](https://amzn.to/41TmrL4)) is one of the best book I have read last year. Written by [Jake Knapp](https://medium.com/u/f230699aec44) and [John Zeratsky](https://medium.com/u/ed1df3d97a1b), it’s a collection of tips, tactics and strategy on how to focus on your daily goals.
 
 ### Intro

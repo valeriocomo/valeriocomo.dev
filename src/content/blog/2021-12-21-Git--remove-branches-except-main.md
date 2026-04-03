@@ -8,12 +8,6 @@ imgUrl: '../../assets/blog/2021-12-21-git-remove-branches-except-main/cover.png'
 description: Keep your git repo clean
 ---
 
-### Git: remove branches except main
-
-#### Keep your git repo clean
-
-![](../../assets/blog/2021-12-21-git-remove-branches-except-main/cover.png)
-
 ### TL;DR
 
 ### Problem

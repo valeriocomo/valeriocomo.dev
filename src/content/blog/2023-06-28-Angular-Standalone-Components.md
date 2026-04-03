@@ -9,15 +9,6 @@ imgUrl: '../../assets/blog/2023-06-28-angular-standalone-components/cover.png'
 description: Shifting from a module-oriented organization to a component-oriented one
 ---
 
-
-### Angular Standalone Components
-
-#### Shifting from a module-oriented organization to a component-oriented one
-
-![](https://cdn-images-1.medium.com/max/800/1*_QgcKt1ifzzRHCnqFQ5LTw.png)
-
-Angular Standalone Components
-
 *Standalone Components* is a one of the most interesting innovations in the Angular ecosystem in recent years. In my humble opinion, one of the most exciting alongside Angular Signals ([checkout my post about Signals!](/blog/2023-04-14_angular-signals)).
 
 This feature aims to simplify the organization of an Angular project. Furthermore, it helps to flatten the learning curve, lowering the entry barrier for new developers.

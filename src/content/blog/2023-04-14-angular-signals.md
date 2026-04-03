@@ -9,14 +9,6 @@ imgUrl: '../../assets/blog/2023-04-14-angular-signals/cover.jpg'
 description: A new reactive primitive
 ---
 
-### Angular Signals
-
-#### A new reactive primitive
-
-![](../../assets/blog/2023-04-14-angular-signals/cover.jpg)
-
-Photo by [Carlos Alberto Gómez Iñiguez](https://unsplash.com/@iniguez?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral)
-
 S***ignals*** is a new primitive, which aims to handle asynchronous events and supports developers in adoptions of reactive patterns. It will be released with *Angular* 16 but it’s yet available through an unstable version of the package (*16.0.0-next.0*).
 
 You may be wondering:

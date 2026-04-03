@@ -9,12 +9,6 @@ imgUrl: '../../assets/blog/2018-10-28-angular-api-proxy/cover.jpg'
 description: Bye bye CORS
 ---
 
-### Angular API Proxy
-
-#### Bye bye CORS
-
-![](../../assets/blog/2018-10-28-angular-api-proxy/cover.jpg)
-
 Lavorare allo sviluppo di una applicazione Angular implica l’utilizzo di un web server di sviluppo. Come ogni Web Application, una Single Page Application Angular (SPA) effettua richieste HTTP ad un API server. Durante la fase di sviluppo, una Web Application Angular è servita da un web server che, di default, è in ascolto su porta *4200*. Contestualmente, il backend server è in ascolto su una porta differente; ad esempio sulla porta *80*, piuttosto che sulla porta *3000*.
 
 Quindi, una richiesta HTTP dall’applicazione frontend verso il server delle API è una chiamata tra due domini differente. Infatti si parla di **Cross-Origin Resource Sharing (CORS)** quando una applicazione effettua una richiesta HTTP verso un server su un differente dominio o su una porta differente.
