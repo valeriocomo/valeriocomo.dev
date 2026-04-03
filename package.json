@@ -20,10 +20,10 @@
     "@astrojs/rss": "^4.0.15",
     "@astrojs/sitemap": "^3.7.0",
     "@eliancodes/brutal-ui": "^0.2.6",
-    "@unocss/astro": "^66.6.0",
-    "astro": "^5.17.1",
+    "@unocss/astro": "^66.6.6",
+    "astro": "^5.18.0",
     "astro-font": "^1.1.0",
-    "satori": "^0.19.1",
+    "satori": "^0.19.2",
     "satori-html": "^0.3.2"
   },
   "devDependencies": {
@@ -32,7 +32,7 @@
     "@resvg/resvg-js": "^2.6.2",
     "@types/dom-chromium-ai": "^0.0.16",
     "@typescript-eslint/parser": "^8.17.0",
-    "@unocss/reset": "^66.6.0",
+    "@unocss/reset": "^66.6.5",
     "eslint": "^9.39.2",
     "eslint-plugin-astro": "^0.34.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
