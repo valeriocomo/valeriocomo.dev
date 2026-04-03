@@ -2,9 +2,12 @@
 interface Props {
   pubDate: Date;
   author: string;
+  title: string;
+  description: string;
+  coverImage?: string;
 }
 
-const { pubDate, author } = Astro.props;
+const { pubDate, author, title, description, coverImage } = Astro.props;
 ---
 
 <article class="prose-slate w-sm md:w-prose md:prose poppins">
@@ -12,6 +15,10 @@ const { pubDate, author } = Astro.props;
   <p class="text-slate text-sm md:text-base">
     Published on {pubDate} by {author}
   </p>
+  <h3>{title}</h3>
+  <h4>{description}</h4>
+  {coverImage && <img src={coverImage} alt={title} class="w-full h-auto" />}
+  <h1>my widget</h1>
   <slot />
   <p class="text-slate">Written by {author}</p>
   <a href="/blog/" title="Back to blog">&larr; Back to blog</a>
