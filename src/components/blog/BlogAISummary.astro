@@ -42,7 +42,7 @@
                 length: "long",
                 format: "plain-text",
                 outputLanguage: "en",
-            };
+            } satisfies SummarizerCreateCoreOptions;
 
             const available = await Summarizer.availability(options);
 
@@ -65,6 +65,11 @@
             });
 
             const content = getSlotContent();
+
+            if (!content.textContent) {
+                console.warn("No text content found to summarize.");
+                return;
+            }
 
             const summary = await summarizer.summarizeStreaming(
                 content.textContent,
