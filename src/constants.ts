@@ -29,10 +29,11 @@ const urlBuilder = (path: string) => {
 
 export const HOME_URL = urlBuilder("");
 export const TALKS_URL = urlBuilder("talks");
+export const BLOG_URL = urlBuilder("blog");
 
 export const FAVICON_URL = urlBuilder("favicon/favicon.ico")
 
-export const BLOG_URL = 'https://medium.com/@valeriocomo'
+export const MEDIUM_URL = 'https://medium.com/@valeriocomo'
 export const GITHUB_URL = 'https://github.com/valeriocomo'
 export const REPO_URL = 'https://github.com/valeriocomo/valeriocomo.dev'
 export const CONTACTS_URL = 'https://meetme.cards/p/valeriocomo'
