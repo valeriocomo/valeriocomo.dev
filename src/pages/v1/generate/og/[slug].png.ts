@@ -30,7 +30,7 @@ export const GET: APIRoute = async ({ params, props }) => {
       <div style="display: flex; flex-direction: column; justify-content: space-between; width: 100%; filter: drop-shadow()">
         <div style="display: flex; justify-content: space-between;">
           <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-            <p style="font-size: 48px;">Brutal theme for Astro</p>
+            <p style="font-size: 48px;">valeriocomo.dev</p>
             <p style="font-size: 38px;">${title}</p>
           </div>
           <img src="https://valeriocomo.dev/_astro/me.Bk6xvcIs_1ME4QF.webp" width="200px" height="200px" style="border: 3px solid black; border-radius: 0.5rem;" />
