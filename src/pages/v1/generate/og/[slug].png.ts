@@ -75,7 +75,3 @@ export const GET: APIRoute = async ({ params, props }) => {
     },
   });
 };
-function fileURLToPath(arg0: URL) {
-  throw new Error('Function not implemented.');
-}
-
