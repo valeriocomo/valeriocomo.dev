@@ -69,7 +69,7 @@ export const GET: APIRoute = async ({ params, props }) => {
   const pngData = resvg.render();
   const pngBuffer = pngData.asPng();
 
-  return new Response(pngBuffer, {
+  return new Response(new Uint8Array(pngBuffer), {
     headers: {
       'content-type': 'image/png',
     },
