@@ -18,34 +18,32 @@ const posts = await getCollection('blog');
 export function getStaticPaths() {
   return posts.map((post) => ({
     params: { slug: post.id },
-    props: { title: post.data.title, description: post.data.description, imgUrl: post.data.imgUrl },
+    props: { title: post.data.title, description: post.data.description },
   }));
 }
 
 export const GET: APIRoute = async ({ params, props }) => {
   const title = props.title.trim() ?? 'Blogpost';
   const description = props.description ?? null;
-  const imgUrl = props.imgUrl ?? null;
-  const image = await getImage({ src: imgUrl });
-  const img = new URL(image.src, import.meta.env.SITE).href;
+
   const html = toReactElement(`
-  <div style="background-color: white; display: flex; flex-direction: column; height: 100%; padding: 3rem; width: 100%">
+    <div style="background-color: white; display: flex; flex-direction: column; height: 100%; padding: 3rem; width: 100%">
     <div style="display:flex; height: 100%; width: 100%; background-color: white; border: 6px solid black; border-radius: 0.5rem; padding: 2rem; filter: drop-shadow(6px 6px 0 rgb(0 0 0 / 1));">
-      <div style="display: flex; flex-direction: column; justify-content: space-between; width: 100%; filter: drop-shadow()">
-        <div style="display: flex; justify-content: space-between;">
-          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-            <p style="font-size: 48px;">valeriocomo.dev</p>
-            <p style="font-size: 38px;">${title}</p>
-          </div>
-          <img src="${img || 'https://valeriocomo.dev/_astro/me.Bk6xvcIs_1ME4QF.webp'}" width="200px" height="200px" style="border: 3px solid black; border-radius: 0.5rem;" />
-        </div>
-        <div style="display: flex;">
-          <p style="font-size: 24px;">${description}</p>
-        </div>
-      </div>
+    <div style="display: flex; flex-direction: column; justify-content: space-between; width: 100%; filter: drop-shadow()">
+    <div style="display: flex; justify-content: space-between;">
+    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+    <p style="font-size: 48px;">valeriocomo.dev</p>
+    <p style="font-size: 38px;">${title}</p>
     </div>
-  </div>
-  `);
+    <img src="https://valeriocomo.dev/_astro/me.Cu4CtHao.jpg" width="200px" height="200px" style="border: 3px solid black; border-radius: 0.5rem;" />
+    </div>
+    <div style="display: flex;">
+    <p style="font-size: 24px;">${description}</p>
+    </div>
+    </div>
+    </div>
+    </div>
+    `);
 
   const svg = await satori(html, {
     fonts: [
@@ -69,13 +67,9 @@ export const GET: APIRoute = async ({ params, props }) => {
   const pngData = resvg.render();
   const pngBuffer = pngData.asPng();
 
-  return new Response(pngBuffer, {
+  return new Response(new Uint8Array(pngBuffer), {
     headers: {
       'content-type': 'image/png',
     },
   });
 };
-function fileURLToPath(arg0: URL) {
-  throw new Error('Function not implemented.');
-}
-
