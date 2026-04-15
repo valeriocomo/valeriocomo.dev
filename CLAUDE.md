@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-pnpm dev        # Start dev server at localhost:4321
+pnpm dev        # Start dev server at localhost:4321 (binds to 127.0.0.1)
 pnpm build      # Build for production
 pnpm preview    # Preview production build
 ```
@@ -31,17 +31,19 @@ Assets for blog posts live in `src/assets/blog/<date-slug>/`; talk assets live i
 - `Default.astro` — standard page layout (nav + footer)
 - `BlogPost.astro` — blog layout with sidebar, content area, and recent posts
 
-**Components** are organized by feature domain: `blog/`, `home/`, `talks/`, `layout/`, `generic/`, `errors/`.
+**Components** are organized by feature domain: `blog/`, `home/`, `talks/`, `layout/`, `generic/`, `errors/`. UI primitives (`Button`, `Card`, `Pill`) come from `@eliancodes/brutal-ui`.
 
 **OG Images:** Dynamically generated at `/v1/generate/og/[slug].png` using Satori + `@resvg/resvg-js`. Blog post assets live in `src/assets/blog/<date-slug>/`.
 
 **Styling:** UnoCSS with `presetWind` (Tailwind), `presetIcons` (Iconify — logos + uil collections), and `presetTypography`. Global styles in `src/styles/global.css`.
 
+**Fonts:** Self-hosted in `public/fonts/` (Outfit, Poppins, Righteous, Sanchez, DM Serif Text). Loaded via `LocalFont.astro` using `astro-font`; apply with CSS class selectors (`.outfit`, `.poppins`, etc.).
+
 **Path aliases:** `@components/*`, `@layouts/*`, `@pages/*` (configured in `tsconfig.json`).
 
 **Analytics:** Google Analytics loaded via Partytown (configured in `astro.config.ts`).
 
-**RSS:** Auto-generated at `/feed.xml` from blog content collection.
+**RSS & Sitemap:** Auto-generated at `/feed.xml` (RSS) and `/sitemap-index.xml` (sitemap) from content collections.
 
 **AI Summary:** Blog posts include a `BlogAISummary` component that uses the Chrome built-in Summarizer API (`window.Summarizer`) to generate TL;DRs client-side. It gracefully degrades to a hint for non-Chrome browsers.
 
