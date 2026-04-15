@@ -44,95 +44,92 @@
 <script>
     function getSlotContent() {
         const slotContainer = document.querySelector("article");
-
-        // Ottieni HTML
         const htmlContent = slotContainer?.innerHTML;
-
-        // Ottieni solo testo
         const textContent = slotContainer?.textContent;
-
-        // Oppure l'intero elemento
         const element = slotContainer;
-
         return { htmlContent, textContent, element };
     }
 
-    const widget = document.getElementById("summary-ai-widget");
-    const hint = document.getElementById("summary-ai-chrome-hint");
+    function initSummaryWidget() {
+        const widget = document.getElementById("summary-ai-widget");
+        const hint = document.getElementById("summary-ai-chrome-hint");
 
-    if ("Summarizer" in self) {
-        widget?.classList.remove("hidden");
-    } else {
-        hint?.classList.remove("hidden");
-    }
-
-    const btn = document.getElementById(
-        "summarize-btn",
-    ) as HTMLButtonElement | null;
-    const spinner = document.getElementById("summarize-btn-spinner");
-
-    function setLoading(loading: boolean) {
-        if (!btn || !spinner) return;
-        btn.disabled = loading;
-        spinner.classList.toggle("hidden", !loading);
-    }
-
-    btn?.addEventListener("click", async () => {
-        setLoading(true);
-
-        const options = {
-            type: "tldr",
-            length: "long",
-            format: "plain-text",
-            outputLanguage: "en",
-        } satisfies SummarizerCreateCoreOptions;
-
-        const available = await Summarizer.availability(options);
-
-        if (available === "unavailable") {
-            console.warn("Summarizer API is unavailable in this environment.");
-            setLoading(false);
-            return;
+        if ("Summarizer" in self) {
+            widget?.classList.remove("hidden");
+        } else {
+            hint?.classList.remove("hidden");
         }
 
-        console.log("Summarizer available:", available);
+        const btn = document.getElementById(
+            "summarize-btn",
+        ) as HTMLButtonElement | null;
+        const spinner = document.getElementById("summarize-btn-spinner");
 
-        const summarizer = await Summarizer.create({
-            ...options,
-            monitor(m) {
-                m.addEventListener("downloadprogress", (e) => {
-                    console.log(`Downloaded ${e.loaded * 100}%`);
-                });
-            },
-        });
-
-        const content = getSlotContent();
-
-        if (!content.textContent) {
-            console.warn("No text content found to summarize.");
-            setLoading(false);
-            return;
+        function setLoading(loading: boolean) {
+            if (!btn || !spinner) return;
+            btn.disabled = loading;
+            spinner.classList.toggle("hidden", !loading);
         }
 
-        const summary = await summarizer.summarizeStreaming(
-            content.textContent,
-            {
-                context: "This article is intended for software developers.",
-            },
-        );
-        const summaryResultElement = document.getElementById("summary-result");
+        btn?.addEventListener("click", async () => {
+            setLoading(true);
 
-        if (summaryResultElement) {
-            summaryResultElement.textContent = ""; // Clear previous summary
+            const options = {
+                type: "tldr",
+                length: "long",
+                format: "plain-text",
+                outputLanguage: "en",
+            } satisfies SummarizerCreateCoreOptions;
 
-            for await (const chunk of summary) {
-                if (!summaryResultElement.textContent) {
-                    summaryResultElement.classList.remove("hidden"); // Show the summary container
-                }
-                summaryResultElement.append(chunk);
+            const available = await Summarizer.availability(options);
+
+            if (available === "unavailable") {
+                console.warn(
+                    "Summarizer API is unavailable in this environment.",
+                );
+                setLoading(false);
+                return;
             }
-        }
 
-        setLoading(false);
-    });
+            console.log("Summarizer available:", available);
+
+            const summarizer = await Summarizer.create({
+                ...options,
+                monitor(m) {
+                    m.addEventListener("downloadprogress", (e) => {
+                        console.log(`Downloaded ${e.loaded * 100}%`);
+                    });
+                },
+            });
+
+            const content = getSlotContent();
+
+            if (!content.textContent) {
+                console.warn("No text content found to summarize.");
+                setLoading(false);
+                return;
+            }
+
+            const summary = summarizer.summarizeStreaming(content.textContent, {
+                context: "This article is intended for software developers.",
+            });
+            const summaryResultElement =
+                document.getElementById("summary-result");
+
+            if (summaryResultElement) {
+                summaryResultElement.textContent = ""; // Clear previous summary
+
+                for await (const chunk of summary) {
+                    if (!summaryResultElement.textContent) {
+                        summaryResultElement.classList.remove("hidden"); // Show the summary container
+                    }
+                    summaryResultElement.append(chunk);
+                }
+            }
+
+            setLoading(false);
+        });
+    }
+
+    document.addEventListener("astro:page-load", initSummaryWidget);
 </script>
