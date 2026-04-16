@@ -4,19 +4,40 @@
 
 <div
     id="summary-ai-widget"
-    class="my-8 p-6 border rounded bg-white shadow hidden"
+    class="my-8 border rounded bg-white shadow hidden overflow-hidden"
 >
-    <h3>Generate a TL;DR with Google Chrome Built-in AI APIs</h3>
-    <button
-        id="summarize-btn"
-        class="px-4 py-2 bg-blue-500 text-white rounded flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+    <div class="p-6">
+        <h3>Generate a TL;DR with Built-in AI APIs</h3>
+        <button
+            id="summarize-btn"
+            class="px-4 py-2 bg-blue-500 text-white rounded flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+            <span
+                id="summarize-btn-spinner"
+                class="hidden animate-spin i-uil-spinner"></span>
+            <span id="summarize-btn-label">Summarize with AI</span>
+        </button>
+        <div id="summary-result" class="mt-4 p-4 bg-gray-100 rounded hidden">
+        </div>
+    </div>
+    <p
+        id="download-progress-label"
+        class="hidden px-6 pb-1 text-xs text-gray-400"
     >
-        <span
-            id="summarize-btn-spinner"
-            class="hidden animate-spin i-uil-spinner"></span>
-        <span id="summarize-btn-label">Summarize with AI</span>
-    </button>
-    <div id="summary-result" class="mt-4 p-4 bg-gray-100 rounded hidden"></div>
+        Be patient, I'm downloading an LLM
+    </p>
+    <div
+        id="download-progress-bar-container"
+        class="hidden h-1 bg-gray-200"
+        title="Model download in progress..."
+    >
+        <div
+            id="download-progress-bar"
+            class="h-full bg-blue-500 transition-all duration-200"
+            style="width: 0%"
+        >
+        </div>
+    </div>
 </div>
 
 <div
@@ -93,14 +114,36 @@
 
             console.log("Summarizer available:", available);
 
+            const progressContainer = document.getElementById(
+                "download-progress-bar-container",
+            );
+            const progressBar = document.getElementById(
+                "download-progress-bar",
+            );
+            const progressLabel = document.getElementById(
+                "download-progress-label",
+            );
+
             const summarizer = await Summarizer.create({
                 ...options,
                 monitor(m) {
                     m.addEventListener("downloadprogress", (e) => {
-                        console.log(`Downloaded ${e.loaded * 100}%`);
+                        const pct = Math.round(e.loaded * 100);
+                        console.log(`Downloaded ${pct}%`);
+                        if (progressContainer && progressBar) {
+                            progressContainer.classList.remove("hidden");
+                            progressLabel?.classList.remove("hidden");
+                            progressBar.style.width = `${pct}%`;
+                        }
                     });
                 },
             });
+
+            if (progressContainer) {
+                progressContainer.classList.add("hidden");
+                progressLabel?.classList.add("hidden");
+                if (progressBar) progressBar.style.width = "0%";
+            }
 
             const content = getSlotContent();
 
