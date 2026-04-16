@@ -109,14 +109,31 @@
             },
         );
 
-        // Truncate to ~1000 chars to stay within T5-small's token limit
-        const truncated = text.length > 1000 ? text.slice(0, 1000) : text;
+        // Split into up to 3 chunks of ~1000 chars each; summarize each chunk
+        // independently and concatenate — produces ~3x more output than a single pass.
+        const CHUNK_SIZE = 1000;
+        const MAX_CHUNKS = Math.ceil(text.length / CHUNK_SIZE);
+        const chunks: string[] = [];
+        for (
+            let i = 0;
+            i < text.length && chunks.length < MAX_CHUNKS;
+            i += CHUNK_SIZE
+        ) {
+            chunks.push(text.slice(i, i + CHUNK_SIZE));
+        }
 
-        const result = await summarizer("summarize: " + truncated, {
-            max_new_tokens: 150,
-        });
-        const output = Array.isArray(result) ? result[0] : result;
-        return (output as { generated_text: string }).generated_text ?? "";
+        const parts: string[] = [];
+        for (let i = 0; i < chunks.length; i++) {
+            onProgress(Math.round(((i + 1) / chunks.length) * 100));
+            const result = await summarizer("summarize: " + chunks[i], {
+                max_new_tokens: 150,
+            });
+            const output = Array.isArray(result) ? result[0] : result;
+            const text = (output as { generated_text: string }).generated_text;
+            if (text) parts.push(text);
+        }
+
+        return parts.join(" ");
     }
 
     function initSummaryWidget() {
