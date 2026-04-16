@@ -7,7 +7,9 @@
     class="my-8 border rounded bg-white shadow hidden overflow-hidden"
 >
     <div class="p-6">
-        <h3>Generate a TL;DR with Built-in AI APIs</h3>
+        <h3 id="summary-ai-widget-title">
+            Generate a TL;DR with Built-in AI APIs
+        </h3>
         <button
             id="summarize-btn"
             class="px-4 py-2 bg-blue-500 text-white rounded flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -24,7 +26,7 @@
         id="download-progress-label"
         class="hidden px-6 pb-1 text-xs text-gray-400"
     >
-        Be patient, I'm downloading an LLM
+        Be patient, I'm downloading an AI model
     </p>
     <div
         id="download-progress-bar-container"
@@ -63,6 +65,8 @@
 </div>
 
 <script>
+    import type { ProgressCallback } from "@huggingface/transformers";
+
     function getSlotContent() {
         const slotContainer = document.querySelector("article");
         const htmlContent = slotContainer?.innerHTML;
@@ -71,12 +75,85 @@
         return { htmlContent, textContent, element };
     }
 
+    type SummaryAPI = "native" | "transformers" | "none";
+
+    function detectSummaryAPI(): SummaryAPI {
+        if ("Summarizer" in self) return "native";
+        if (typeof window !== "undefined") return "transformers";
+        return "none";
+    }
+
+    async function summarizeWithWebNN(
+        text: string,
+        onProgress: (pct: number) => void,
+    ): Promise<string> {
+        const { pipeline } = await import("@huggingface/transformers");
+
+        const progressCallback: ProgressCallback = (info) => {
+            if (info.status === "progress" && info.progress != null) {
+                onProgress(Math.round(info.progress));
+            }
+        };
+
+        // Prefer WebNN hardware acceleration; fall back to WASM for browsers
+        // that don't expose navigator.ml (e.g. Firefox, Safari).
+        const device = "ml" in navigator ? "webnn" : "wasm";
+
+        const summarizer = await pipeline(
+            "text2text-generation",
+            "Xenova/t5-small",
+            {
+                device,
+                dtype: "fp32",
+                progress_callback: progressCallback,
+            },
+        );
+
+        // Split into up to 3 chunks of ~1000 chars each; summarize each chunk
+        // independently and concatenate — produces ~3x more output than a single pass.
+        const CHUNK_SIZE = 1000;
+        const MAX_CHUNKS = Math.ceil(text.length / CHUNK_SIZE);
+        const chunks: string[] = [];
+        for (
+            let i = 0;
+            i < text.length && chunks.length < MAX_CHUNKS;
+            i += CHUNK_SIZE
+        ) {
+            chunks.push(text.slice(i, i + CHUNK_SIZE));
+        }
+
+        const parts: string[] = [];
+        for (let i = 0; i < chunks.length; i++) {
+            onProgress(Math.round(((i + 1) / chunks.length) * 100));
+            const result = await summarizer("summarize: " + chunks[i], {
+                max_new_tokens: 150,
+            });
+            const output = Array.isArray(result) ? result[0] : result;
+            const text = (output as { generated_text: string }).generated_text;
+            if (text) parts.push(text);
+        }
+
+        return parts.join(" ");
+    }
+
     function initSummaryWidget() {
         const widget = document.getElementById("summary-ai-widget");
         const hint = document.getElementById("summary-ai-chrome-hint");
+        const widgetTitle = document.getElementById("summary-ai-widget-title");
+        const btnLabel = document.getElementById("summarize-btn-label");
 
-        if ("Summarizer" in self) {
+        const api = detectSummaryAPI();
+
+        if (api === "native") {
             widget?.classList.remove("hidden");
+        } else if (api === "transformers") {
+            widget?.classList.remove("hidden");
+            const backendLabel =
+                "ml" in navigator ? "WebNN" : "Transformers.js";
+            if (widgetTitle)
+                widgetTitle.textContent = `Generate a TL;DR with ${backendLabel}`;
+            if (btnLabel)
+                btnLabel.textContent = `Summarize with ${backendLabel}`;
         } else {
             hint?.classList.remove("hidden");
         }
@@ -92,82 +169,118 @@
             spinner.classList.toggle("hidden", !loading);
         }
 
+        const progressContainer = document.getElementById(
+            "download-progress-bar-container",
+        );
+        const progressBar = document.getElementById("download-progress-bar");
+        const progressLabel = document.getElementById(
+            "download-progress-label",
+        );
+
+        function showProgress(pct: number) {
+            if (progressContainer && progressBar) {
+                progressContainer.classList.remove("hidden");
+                progressLabel?.classList.remove("hidden");
+                progressBar.style.width = `${pct}%`;
+            }
+        }
+
+        function hideProgress() {
+            progressContainer?.classList.add("hidden");
+            progressLabel?.classList.add("hidden");
+            if (progressBar) progressBar.style.width = "0%";
+        }
+
         btn?.addEventListener("click", async () => {
             setLoading(true);
 
-            const options = {
-                type: "tldr",
-                length: "long",
-                format: "plain-text",
-                outputLanguage: "en",
-            } satisfies SummarizerCreateCoreOptions;
-
-            const available = await Summarizer.availability(options);
-
-            if (available === "unavailable") {
-                console.warn(
-                    "Summarizer API is unavailable in this environment.",
-                );
-                setLoading(false);
-                return;
-            }
-
-            console.log("Summarizer available:", available);
-
-            const progressContainer = document.getElementById(
-                "download-progress-bar-container",
-            );
-            const progressBar = document.getElementById(
-                "download-progress-bar",
-            );
-            const progressLabel = document.getElementById(
-                "download-progress-label",
-            );
-
-            const summarizer = await Summarizer.create({
-                ...options,
-                monitor(m) {
-                    m.addEventListener("downloadprogress", (e) => {
-                        const pct = Math.round(e.loaded * 100);
-                        console.log(`Downloaded ${pct}%`);
-                        if (progressContainer && progressBar) {
-                            progressContainer.classList.remove("hidden");
-                            progressLabel?.classList.remove("hidden");
-                            progressBar.style.width = `${pct}%`;
-                        }
-                    });
-                },
-            });
-
-            if (progressContainer) {
-                progressContainer.classList.add("hidden");
-                progressLabel?.classList.add("hidden");
-                if (progressBar) progressBar.style.width = "0%";
-            }
-
-            const content = getSlotContent();
-
-            if (!content.textContent) {
-                console.warn("No text content found to summarize.");
-                setLoading(false);
-                return;
-            }
-
-            const summary = summarizer.summarizeStreaming(content.textContent, {
-                context: "This article is intended for software developers.",
-            });
             const summaryResultElement =
                 document.getElementById("summary-result");
 
-            if (summaryResultElement) {
-                summaryResultElement.textContent = ""; // Clear previous summary
+            try {
+                if (api === "native") {
+                    const options = {
+                        type: "tldr",
+                        length: "long",
+                        format: "plain-text",
+                        outputLanguage: "en",
+                    } satisfies SummarizerCreateCoreOptions;
 
-                for await (const chunk of summary) {
-                    if (!summaryResultElement.textContent) {
-                        summaryResultElement.classList.remove("hidden"); // Show the summary container
+                    const available = await Summarizer.availability(options);
+
+                    if (available === "unavailable") {
+                        console.warn(
+                            "Summarizer API is unavailable in this environment.",
+                        );
+                        setLoading(false);
+                        return;
                     }
-                    summaryResultElement.append(chunk);
+
+                    console.log("Summarizer available:", available);
+
+                    const summarizer = await Summarizer.create({
+                        ...options,
+                        monitor(m) {
+                            m.addEventListener("downloadprogress", (e) => {
+                                const pct = Math.round(e.loaded * 100);
+                                console.log(`Downloaded ${pct}%`);
+                                showProgress(pct);
+                            });
+                        },
+                    });
+
+                    hideProgress();
+
+                    const content = getSlotContent();
+
+                    if (!content.textContent) {
+                        console.warn("No text content found to summarize.");
+                        setLoading(false);
+                        return;
+                    }
+
+                    const summary = summarizer.summarizeStreaming(
+                        content.textContent,
+                        {
+                            context:
+                                "This article is intended for software developers.",
+                        },
+                    );
+
+                    if (summaryResultElement) {
+                        summaryResultElement.textContent = "";
+
+                        for await (const chunk of summary) {
+                            if (!summaryResultElement.textContent) {
+                                summaryResultElement.classList.remove("hidden");
+                            }
+                            summaryResultElement.append(chunk);
+                        }
+                    }
+                } else if (api === "transformers") {
+                    const content = getSlotContent();
+
+                    if (!content.textContent) {
+                        console.warn("No text content found to summarize.");
+                        setLoading(false);
+                        return;
+                    }
+
+                    const summaryText = await summarizeWithWebNN(
+                        content.textContent,
+                        showProgress,
+                    );
+
+                    hideProgress();
+
+                    if (summaryResultElement) {
+                        summaryResultElement.textContent = summaryText;
+                        summaryResultElement.classList.remove("hidden");
+                    }
                 }
+            } catch (err) {
+                console.error("Summarization failed:", err);
+                hideProgress();
             }
 
             setLoading(false);
