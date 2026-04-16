@@ -20,6 +20,12 @@
         <div id="summary-result" class="mt-4 p-4 bg-gray-100 rounded hidden">
         </div>
     </div>
+    <p
+        id="download-progress-label"
+        class="hidden px-6 pb-1 text-xs text-gray-400"
+    >
+        Be patient, I'm downloading an LLM
+    </p>
     <div
         id="download-progress-bar-container"
         class="hidden h-1 bg-gray-200"
@@ -114,6 +120,9 @@
             const progressBar = document.getElementById(
                 "download-progress-bar",
             );
+            const progressLabel = document.getElementById(
+                "download-progress-label",
+            );
 
             const summarizer = await Summarizer.create({
                 ...options,
@@ -123,6 +132,7 @@
                         console.log(`Downloaded ${pct}%`);
                         if (progressContainer && progressBar) {
                             progressContainer.classList.remove("hidden");
+                            progressLabel?.classList.remove("hidden");
                             progressBar.style.width = `${pct}%`;
                         }
                     });
@@ -131,6 +141,7 @@
 
             if (progressContainer) {
                 progressContainer.classList.add("hidden");
+                progressLabel?.classList.add("hidden");
                 if (progressBar) progressBar.style.width = "0%";
             }
 
