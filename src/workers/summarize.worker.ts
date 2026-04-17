@@ -1,9 +1,10 @@
 import { pipeline } from "@huggingface/transformers";
-import type { ProgressCallback } from "@huggingface/transformers";
+import type {
+    ProgressCallback,
+    Text2TextGenerationPipeline,
+} from "@huggingface/transformers";
 
-type PipelineInstance = Awaited<ReturnType<typeof pipeline>>;
-
-let cachedPipeline: PipelineInstance | null = null;
+let cachedPipeline: Text2TextGenerationPipeline | null = null;
 
 self.addEventListener(
     "message",
