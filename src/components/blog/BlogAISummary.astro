@@ -75,10 +75,10 @@
         return { htmlContent, textContent, element };
     }
 
-    type SummaryAPI = "native" | "transformers" | "none";
+    type SummaryAPI = "built-in" | "transformers" | "none";
 
     function detectSummaryAPI(): SummaryAPI {
-        if ("Summarizer" in self) return "native";
+        if ("Summarizer" in self) return "built-in";
         if (typeof window !== "undefined") return "transformers";
         return "none";
     }
@@ -125,7 +125,7 @@
 
         const api = detectSummaryAPI();
 
-        if (api === "native") {
+        if (api === "built-in") {
             widget?.classList.remove("hidden");
         } else if (api === "transformers") {
             widget?.classList.remove("hidden");
@@ -179,7 +179,7 @@
                 document.getElementById("summary-result");
 
             try {
-                if (api === "native") {
+                if (api === "built-in") {
                     const options = {
                         type: "tldr",
                         length: "long",
