@@ -65,7 +65,7 @@
 </div>
 
 <script>
-    import SummarizeWorker from "../../workers/summarize.worker.ts?worker";
+    import WebNNSummarizeWorker from "../../workers/webnn-summarizer.worker.ts?worker";
 
     function getSlotContent() {
         const slotContainer = document.querySelector("article");
@@ -87,7 +87,7 @@
 
     function getSummarizeWorker(): Worker {
         if (!worker) {
-            worker = new SummarizeWorker();
+            worker = new WebNNSummarizeWorker();
         }
         return worker;
     }
