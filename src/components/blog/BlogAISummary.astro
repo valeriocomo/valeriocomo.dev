@@ -65,7 +65,7 @@
 </div>
 
 <script>
-    import type { ProgressCallback } from "@huggingface/transformers";
+    import SummarizeWorker from "../../workers/summarize.worker.ts?worker";
 
     function getSlotContent() {
         const slotContainer = document.querySelector("article");
@@ -83,57 +83,38 @@
         return "none";
     }
 
-    async function summarizeWithWebNN(
+    let worker: Worker | null = null;
+
+    function getSummarizeWorker(): Worker {
+        if (!worker) {
+            worker = new SummarizeWorker();
+        }
+        return worker;
+    }
+
+    function summarizeWithWorker(
         text: string,
         onProgress: (pct: number) => void,
     ): Promise<string> {
-        const { pipeline } = await import("@huggingface/transformers");
+        return new Promise((resolve, reject) => {
+            const w = getSummarizeWorker();
 
-        const progressCallback: ProgressCallback = (info) => {
-            if (info.status === "progress" && info.progress != null) {
-                onProgress(Math.round(info.progress));
-            }
-        };
+            const onMessage = (e: MessageEvent) => {
+                const { type, pct, summary, error } = e.data;
+                if (type === "progress") {
+                    onProgress(pct);
+                } else if (type === "result") {
+                    w.removeEventListener("message", onMessage);
+                    resolve(summary);
+                } else if (type === "error") {
+                    w.removeEventListener("message", onMessage);
+                    reject(new Error(error));
+                }
+            };
 
-        // Prefer WebNN hardware acceleration; fall back to WASM for browsers
-        // that don't expose navigator.ml (e.g. Firefox, Safari).
-        const device = "ml" in navigator ? "webnn" : "wasm";
-
-        const summarizer = await pipeline(
-            "text2text-generation",
-            "Xenova/t5-small",
-            {
-                device,
-                dtype: "fp32",
-                progress_callback: progressCallback,
-            },
-        );
-
-        // Split into up to 3 chunks of ~1000 chars each; summarize each chunk
-        // independently and concatenate — produces ~3x more output than a single pass.
-        const CHUNK_SIZE = 1000;
-        const MAX_CHUNKS = Math.ceil(text.length / CHUNK_SIZE);
-        const chunks: string[] = [];
-        for (
-            let i = 0;
-            i < text.length && chunks.length < MAX_CHUNKS;
-            i += CHUNK_SIZE
-        ) {
-            chunks.push(text.slice(i, i + CHUNK_SIZE));
-        }
-
-        const parts: string[] = [];
-        for (let i = 0; i < chunks.length; i++) {
-            onProgress(Math.round(((i + 1) / chunks.length) * 100));
-            const result = await summarizer("summarize: " + chunks[i], {
-                max_new_tokens: 150,
-            });
-            const output = Array.isArray(result) ? result[0] : result;
-            const text = (output as { generated_text: string }).generated_text;
-            if (text) parts.push(text);
-        }
-
-        return parts.join(" ");
+            w.addEventListener("message", onMessage);
+            w.postMessage({ text });
+        });
     }
 
     function initSummaryWidget() {
@@ -266,7 +247,7 @@
                         return;
                     }
 
-                    const summaryText = await summarizeWithWebNN(
+                    const summaryText = await summarizeWithWorker(
                         content.textContent,
                         showProgress,
                     );
