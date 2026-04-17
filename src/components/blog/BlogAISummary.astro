@@ -78,9 +78,14 @@
     type SummaryAPI = "built-in" | "transformers" | "none";
 
     function detectSummaryAPI(): SummaryAPI {
-        if ("Summarizer" in self) return "built-in";
-        if (typeof window !== "undefined") return "transformers";
-        return "none";
+        switch (true) {
+            case "Summarizer" in self:
+                return "built-in";
+            case typeof window !== "undefined":
+                return "transformers";
+            default:
+                return "none";
+        }
     }
 
     let worker: Worker | null = null;
