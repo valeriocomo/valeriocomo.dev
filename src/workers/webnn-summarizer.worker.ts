@@ -42,7 +42,6 @@ const summarizeWithNN = async (text: string) => {
             chunks.push(text.slice(i, i + CHUNK_SIZE));
         }
 
-        const parts: string[] = [];
         for (let i = 0; i < chunks.length; i++) {
             self.postMessage({
                 type: "progress",
@@ -55,10 +54,10 @@ const summarizeWithNN = async (text: string) => {
             const output = Array.isArray(result) ? result[0] : result;
             const generated = (output as { generated_text: string })
                 .generated_text;
-            if (generated) parts.push(generated);
+            if (generated) {
+                self.postMessage({ type: "chunk", text: generated });
+            }
         }
-
-        return parts.join(" ")
     } catch {
         throw new Error('summarizeWithNN failed')
     }
@@ -70,8 +69,8 @@ self.addEventListener(
         const { text } = event.data;
 
         try {
-            const summary = await summarizeWithNN(text);
-            self.postMessage({ type: "result", summary });
+            await summarizeWithNN(text);
+            self.postMessage({ type: "done" });
         } catch (err) {
             self.postMessage({ type: "error", error: String(err) });
         }

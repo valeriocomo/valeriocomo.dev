@@ -101,17 +101,20 @@
     function summarizeWithWorker(
         text: string,
         onProgress: (pct: number) => void,
-    ): Promise<string> {
+        onChunk: (chunk: string) => void,
+    ): Promise<void> {
         return new Promise((resolve, reject) => {
             const w = getSummarizeWorker();
 
             const onMessage = (e: MessageEvent) => {
-                const { type, pct, summary, error } = e.data;
+                const { type, pct, text: chunkText, error } = e.data;
                 if (type === "progress") {
                     onProgress(pct);
-                } else if (type === "result") {
+                } else if (type === "chunk") {
+                    onChunk(chunkText);
+                } else if (type === "done") {
                     w.removeEventListener("message", onMessage);
-                    resolve(summary);
+                    resolve();
                 } else if (type === "error") {
                     w.removeEventListener("message", onMessage);
                     reject(new Error(error));
@@ -253,17 +256,26 @@
                         return;
                     }
 
-                    const summaryText = await summarizeWithWorker(
+                    if (summaryResultElement) {
+                        summaryResultElement.textContent = "";
+                    }
+
+                    await summarizeWithWorker(
                         content.textContent,
                         showProgress,
+                        (chunk) => {
+                            if (summaryResultElement) {
+                                if (!summaryResultElement.textContent) {
+                                    summaryResultElement.classList.remove("hidden");
+                                }
+                                summaryResultElement.append(
+                                    summaryResultElement.textContent ? " " + chunk : chunk
+                                );
+                            }
+                        },
                     );
 
                     hideProgress();
-
-                    if (summaryResultElement) {
-                        summaryResultElement.textContent = summaryText;
-                        summaryResultElement.classList.remove("hidden");
-                    }
                 }
             } catch (err) {
                 console.error("Summarization failed:", err);
