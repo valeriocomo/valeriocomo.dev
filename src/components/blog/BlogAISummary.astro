@@ -69,10 +69,11 @@
 
     function getSlotContent() {
         const slotContainer = document.querySelector("article");
-        const htmlContent = slotContainer?.innerHTML;
-        const textContent = slotContainer?.textContent;
-        const element = slotContainer;
-        return { htmlContent, textContent, element };
+        const clone = slotContainer?.cloneNode(true) as HTMLElement | null;
+        clone?.querySelector("#summary-ai-widget")?.remove();
+        clone?.querySelector("#summary-ai-chrome-hint")?.remove();
+        const textContent = clone?.textContent ?? null;
+        return { textContent, element: slotContainer };
     }
 
     type SummaryAPI = "built-in" | "transformers" | "none";
