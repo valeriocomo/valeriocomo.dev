@@ -1,10 +1,10 @@
 import { pipeline } from "@huggingface/transformers";
 import type {
     ProgressCallback,
-    Text2TextGenerationPipeline,
+    SummarizationPipeline,
 } from "@huggingface/transformers";
 
-let cachedPipeline: Text2TextGenerationPipeline | null = null;
+let cachedPipeline: SummarizationPipeline | null = null;
 
 const summarizeWithNN = async (text: string) => {
     try {
@@ -21,8 +21,8 @@ const summarizeWithNN = async (text: string) => {
             const device = "ml" in navigator ? "webnn" : "wasm";
 
             cachedPipeline = await pipeline(
-                "text2text-generation",
-                "Xenova/t5-small",
+                "summarization",
+                "Xenova/distilbart-cnn-6-6",
                 {
                     device,
                     dtype: "fp32",
@@ -31,7 +31,7 @@ const summarizeWithNN = async (text: string) => {
             );
         }
 
-        const CHUNK_SIZE = 1000;
+        const CHUNK_SIZE = 9280;
         const MAX_CHUNKS = Math.ceil(text.length / CHUNK_SIZE);
         const chunks: string[] = [];
         for (
@@ -48,15 +48,14 @@ const summarizeWithNN = async (text: string) => {
                 pct: Math.round(((i + 1) / chunks.length) * 100),
             });
             const result = await cachedPipeline(
-                "summarize: " + chunks[i],
-                { max_new_tokens: 150 },
+                chunks[i],
+                // { max_new_tokens: 150 },
             );
             const output = Array.isArray(result) ? result[0] : result;
-            const generated = (output as { generated_text: string })
-                .generated_text;
-            if (generated) {
-                self.postMessage({ type: "chunk", text: generated });
-            }
+            const generated = (output as { summary_text: string })
+                .summary_text;
+
+            self.postMessage({ type: "chunk", text: generated });
         }
     } catch {
         throw new Error('summarizeWithNN failed')
