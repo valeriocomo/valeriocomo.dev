@@ -18,7 +18,18 @@ const summarizeWithNN = async (text: string) => {
                 }
             };
 
-            const device = "ml" in navigator ? "webnn" : "wasm";
+            const deviceDetection = () => {
+                switch (true) {
+                    case "ml" in navigator:
+                        return 'webnn'
+                    case "gpu" in navigator:
+                        return 'webgpu'
+                    default:
+                        return 'wasm'
+                }
+            }
+
+            const device = deviceDetection();
 
             cachedPipeline = await pipeline(
                 "summarization",
