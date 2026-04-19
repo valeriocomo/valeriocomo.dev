@@ -98,32 +98,78 @@
         return worker;
     }
 
-    function summarizeWithWorker(
+    type SummarizerFn = (text: string, onProgress?: (pct: number) => void) => AsyncIterable<string>;
+
+    async function* summarizeBuiltIn(
         text: string,
-        onProgress: (pct: number) => void,
-        onChunk: (chunk: string) => void,
-    ): Promise<void> {
-        return new Promise((resolve, reject) => {
-            const w = getSummarizeWorker();
+        onProgress?: (pct: number) => void,
+    ): AsyncIterable<string> {
+        const options = {
+            type: "tldr",
+            length: "long",
+            format: "plain-text",
+            outputLanguage: "en",
+        } satisfies SummarizerCreateCoreOptions;
 
-            const onMessage = (e: MessageEvent) => {
-                const { type, pct, text: chunkText, error } = e.data;
-                if (type === "progress") {
-                    onProgress(pct);
-                } else if (type === "chunk") {
-                    onChunk(chunkText);
-                } else if (type === "done") {
-                    w.removeEventListener("message", onMessage);
-                    resolve();
-                } else if (type === "error") {
-                    w.removeEventListener("message", onMessage);
-                    reject(new Error(error));
-                }
-            };
+        const available = await Summarizer.availability(options);
+        if (available === "unavailable") {
+            throw new Error("Summarizer API is unavailable in this environment.");
+        }
 
-            w.addEventListener("message", onMessage);
-            w.postMessage({ text });
+        console.log("Summarizer available:", available);
+
+        const summarizer = await Summarizer.create({
+            ...options,
+            monitor(m) {
+                m.addEventListener("downloadprogress", (e) => {
+                    const pct = Math.round(e.loaded * 100);
+                    console.log(`Downloaded ${pct}%`);
+                    onProgress?.(pct);
+                });
+            },
         });
+
+        yield* summarizer.summarizeStreaming(text, {
+            context: "This article is intended for software developers.",
+        });
+    }
+
+    async function* summarizeTransformers(
+        text: string,
+        onProgress?: (pct: number) => void,
+    ): AsyncIterable<string> {
+        const w = getSummarizeWorker();
+        const queue: Array<
+            | { type: "chunk"; value: string }
+            | { type: "done" }
+            | { type: "error"; error: Error }
+        > = [];
+        let notify: (() => void) | null = null;
+
+        const onMessage = ({ data: { type, pct, text: chunk, error } }: MessageEvent) => {
+            if (type === "progress") onProgress?.(pct);
+            else if (type === "chunk") queue.push({ type: "chunk", value: chunk });
+            else if (type === "done") queue.push({ type: "done" });
+            else if (type === "error") queue.push({ type: "error", error: new Error(error) });
+            notify?.();
+        };
+
+        w.addEventListener("message", onMessage);
+        w.postMessage({ text });
+
+        try {
+            while (true) {
+                if (!queue.length) await new Promise<void>((r) => { notify = r; });
+                notify = null;
+                const item = queue.shift();
+                if (!item) continue;
+                if (item.type === "chunk") yield item.value;
+                else if (item.type === "done") break;
+                else throw item.error;
+            }
+        } finally {
+            w.removeEventListener("message", onMessage);
+        }
     }
 
     function initSummaryWidget() {
@@ -184,105 +230,31 @@
         btn?.addEventListener("click", async () => {
             setLoading(true);
 
-            const summaryResultElement =
-                document.getElementById("summary-result");
+            const { textContent } = getSlotContent();
+            if (!textContent) {
+                console.warn("No text content found to summarize.");
+                setLoading(false);
+                return;
+            }
+
+            const summarize: SummarizerFn =
+                api === "built-in" ? summarizeBuiltIn : summarizeTransformers;
+            const summaryResultElement = document.getElementById("summary-result");
+            if (summaryResultElement) summaryResultElement.textContent = "";
 
             try {
-                if (api === "built-in") {
-                    const options = {
-                        type: "tldr",
-                        length: "long",
-                        format: "plain-text",
-                        outputLanguage: "en",
-                    } satisfies SummarizerCreateCoreOptions;
-
-                    const available = await Summarizer.availability(options);
-
-                    if (available === "unavailable") {
-                        console.warn(
-                            "Summarizer API is unavailable in this environment.",
-                        );
-                        setLoading(false);
-                        return;
+                for await (const chunk of summarize(textContent, showProgress)) {
+                    if (!summaryResultElement?.textContent) {
+                        summaryResultElement?.classList.remove("hidden");
                     }
-
-                    console.log("Summarizer available:", available);
-
-                    const summarizer = await Summarizer.create({
-                        ...options,
-                        monitor(m) {
-                            m.addEventListener("downloadprogress", (e) => {
-                                const pct = Math.round(e.loaded * 100);
-                                console.log(`Downloaded ${pct}%`);
-                                showProgress(pct);
-                            });
-                        },
-                    });
-
-                    hideProgress();
-
-                    const content = getSlotContent();
-
-                    if (!content.textContent) {
-                        console.warn("No text content found to summarize.");
-                        setLoading(false);
-                        return;
-                    }
-
-                    const summary = summarizer.summarizeStreaming(
-                        content.textContent,
-                        {
-                            context:
-                                "This article is intended for software developers.",
-                        },
-                    );
-
-                    if (summaryResultElement) {
-                        summaryResultElement.textContent = "";
-
-                        for await (const chunk of summary) {
-                            if (!summaryResultElement.textContent) {
-                                summaryResultElement.classList.remove("hidden");
-                            }
-                            summaryResultElement.append(chunk);
-                        }
-                    }
-                } else if (api === "transformers") {
-                    const content = getSlotContent();
-
-                    if (!content.textContent) {
-                        console.warn("No text content found to summarize.");
-                        setLoading(false);
-                        return;
-                    }
-
-                    if (summaryResultElement) {
-                        summaryResultElement.textContent = "";
-                    }
-
-                    await summarizeWithWorker(
-                        content.textContent,
-                        showProgress,
-                        (chunk) => {
-                            if (summaryResultElement) {
-                                if (!summaryResultElement.textContent) {
-                                    summaryResultElement.classList.remove("hidden");
-                                }
-                                summaryResultElement.append(
-                                    summaryResultElement.textContent ? " " + chunk : chunk
-                                );
-                            }
-                        },
-                    );
-
-                    hideProgress();
+                    summaryResultElement?.append(chunk);
                 }
             } catch (err) {
                 console.error("Summarization failed:", err);
+            } finally {
                 hideProgress();
+                setLoading(false);
             }
-
-            setLoading(false);
         });
     }
 
