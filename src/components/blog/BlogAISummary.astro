@@ -103,7 +103,10 @@
         return worker;
     }
 
-    type SummarizerFn = (text: string, onProgress?: (pct: number) => void) => AsyncIterable<string>;
+    type SummarizerFn = (
+        text: string,
+        onProgress?: (pct: number) => void,
+    ) => AsyncIterable<string>;
 
     async function* summarizeBuiltIn(
         text: string,
@@ -118,7 +121,9 @@
 
         const available = await Summarizer.availability(options);
         if (available === "unavailable") {
-            throw new Error("Summarizer API is unavailable in this environment.");
+            throw new Error(
+                "Summarizer API is unavailable in this environment.",
+            );
         }
 
         console.log("Summarizer available:", available);
@@ -151,11 +156,15 @@
         > = [];
         let notify: (() => void) | null = null;
 
-        const onMessage = ({ data: { type, pct, text: chunk, error } }: MessageEvent) => {
+        const onMessage = ({
+            data: { type, pct, text: chunk, error },
+        }: MessageEvent) => {
             if (type === "progress") onProgress?.(pct);
-            else if (type === "chunk") queue.push({ type: "chunk", value: chunk });
+            else if (type === "chunk")
+                queue.push({ type: "chunk", value: chunk });
             else if (type === "done") queue.push({ type: "done" });
-            else if (type === "error") queue.push({ type: "error", error: new Error(error) });
+            else if (type === "error")
+                queue.push({ type: "error", error: new Error(error) });
             notify?.();
         };
 
@@ -164,7 +173,10 @@
 
         try {
             while (true) {
-                if (!queue.length) await new Promise<void>((r) => { notify = r; });
+                if (!queue.length)
+                    await new Promise<void>((r) => {
+                        notify = r;
+                    });
                 notify = null;
                 const item = queue.shift();
                 if (!item) continue;
@@ -221,7 +233,7 @@
         function showProgress(pct: number) {
             if (progressContainer && progressBar) {
                 progressContainer.classList.remove("hidden");
-                progressLabel?.classList.remove("hidden");
+                progressLabel?.classList.toggle("hidden", pct >= 100);
                 progressBar.style.width = `${pct}%`;
             }
         }
@@ -244,8 +256,10 @@
 
             const summarize: SummarizerFn =
                 api === "built-in" ? summarizeBuiltIn : summarizeTransformers;
-            const summaryResultElement = document.getElementById("summary-result");
-            const summarySkeletonElement = document.getElementById("summary-skeleton");
+            const summaryResultElement =
+                document.getElementById("summary-result");
+            const summarySkeletonElement =
+                document.getElementById("summary-skeleton");
 
             // Reset: rimuove i text node precedenti mantenendo lo skeleton nel DOM
             if (summaryResultElement) {
@@ -259,10 +273,14 @@
 
             let firstChunk = true;
             try {
-                for await (const chunk of summarize(textContent, showProgress)) {
+                for await (const chunk of summarize(
+                    textContent,
+                    showProgress,
+                )) {
                     if (firstChunk) {
                         firstChunk = false;
                         summarySkeletonElement?.classList.add("hidden");
+                        hideProgress();
                     }
                     summaryResultElement?.append(chunk);
                 }
