@@ -20,6 +20,11 @@
             <span id="summarize-btn-label">Summarize with AI</span>
         </button>
         <div id="summary-result" class="mt-4 p-4 bg-gray-100 rounded hidden">
+            <div id="summary-skeleton" class="hidden space-y-2">
+                <div class="h-3 bg-gray-300 rounded animate-pulse w-full"></div>
+                <div class="h-3 bg-gray-300 rounded animate-pulse w-5/6"></div>
+                <div class="h-3 bg-gray-300 rounded animate-pulse w-4/6"></div>
+            </div>
         </div>
     </div>
     <p
@@ -240,18 +245,31 @@
             const summarize: SummarizerFn =
                 api === "built-in" ? summarizeBuiltIn : summarizeTransformers;
             const summaryResultElement = document.getElementById("summary-result");
-            if (summaryResultElement) summaryResultElement.textContent = "";
+            const summarySkeletonElement = document.getElementById("summary-skeleton");
 
+            // Reset: rimuove i text node precedenti mantenendo lo skeleton nel DOM
+            if (summaryResultElement) {
+                for (const node of [...summaryResultElement.childNodes]) {
+                    if (node !== summarySkeletonElement) node.remove();
+                }
+            }
+
+            summaryResultElement?.classList.remove("hidden");
+            summarySkeletonElement?.classList.remove("hidden");
+
+            let firstChunk = true;
             try {
                 for await (const chunk of summarize(textContent, showProgress)) {
-                    if (!summaryResultElement?.textContent) {
-                        summaryResultElement?.classList.remove("hidden");
+                    if (firstChunk) {
+                        firstChunk = false;
+                        summarySkeletonElement?.classList.add("hidden");
                     }
                     summaryResultElement?.append(chunk);
                 }
             } catch (err) {
                 console.error("Summarization failed:", err);
             } finally {
+                summarySkeletonElement?.classList.add("hidden");
                 hideProgress();
                 setLoading(false);
             }
