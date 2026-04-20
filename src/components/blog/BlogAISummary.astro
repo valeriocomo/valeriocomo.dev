@@ -20,6 +20,11 @@
             <span id="summarize-btn-label">Summarize with AI</span>
         </button>
         <div id="summary-result" class="mt-4 p-4 bg-gray-100 rounded hidden">
+            <div id="summary-skeleton" class="hidden space-y-2">
+                <div class="h-3 bg-gray-300 rounded animate-pulse w-full"></div>
+                <div class="h-3 bg-gray-300 rounded animate-pulse w-5/6"></div>
+                <div class="h-3 bg-gray-300 rounded animate-pulse w-4/6"></div>
+            </div>
         </div>
     </div>
     <p
@@ -98,32 +103,90 @@
         return worker;
     }
 
-    function summarizeWithWorker(
+    type SummarizerFn = (
         text: string,
-        onProgress: (pct: number) => void,
-        onChunk: (chunk: string) => void,
-    ): Promise<void> {
-        return new Promise((resolve, reject) => {
-            const w = getSummarizeWorker();
+        onProgress?: (pct: number) => void,
+    ) => AsyncIterable<string>;
 
-            const onMessage = (e: MessageEvent) => {
-                const { type, pct, text: chunkText, error } = e.data;
-                if (type === "progress") {
-                    onProgress(pct);
-                } else if (type === "chunk") {
-                    onChunk(chunkText);
-                } else if (type === "done") {
-                    w.removeEventListener("message", onMessage);
-                    resolve();
-                } else if (type === "error") {
-                    w.removeEventListener("message", onMessage);
-                    reject(new Error(error));
-                }
-            };
+    async function* summarizeBuiltIn(
+        text: string,
+        onProgress?: (pct: number) => void,
+    ): AsyncIterable<string> {
+        const options = {
+            type: "tldr",
+            length: "long",
+            format: "plain-text",
+            outputLanguage: "en",
+        } satisfies SummarizerCreateCoreOptions;
 
-            w.addEventListener("message", onMessage);
-            w.postMessage({ text });
+        const available = await Summarizer.availability(options);
+        if (available === "unavailable") {
+            throw new Error(
+                "Summarizer API is unavailable in this environment.",
+            );
+        }
+
+        console.log("Summarizer available:", available);
+
+        const summarizer = await Summarizer.create({
+            ...options,
+            monitor(m) {
+                m.addEventListener("downloadprogress", (e) => {
+                    const pct = Math.round(e.loaded * 100);
+                    console.log(`Downloaded ${pct}%`);
+                    onProgress?.(pct);
+                });
+            },
         });
+
+        yield* summarizer.summarizeStreaming(text, {
+            context: "This article is intended for software developers.",
+        });
+    }
+
+    async function* summarizeTransformers(
+        text: string,
+        onProgress?: (pct: number) => void,
+    ): AsyncIterable<string> {
+        const w = getSummarizeWorker();
+        const queue: Array<
+            | { type: "chunk"; value: string }
+            | { type: "done" }
+            | { type: "error"; error: Error }
+        > = [];
+        let notify: (() => void) | null = null;
+
+        const onMessage = ({
+            data: { type, pct, text: chunk, error },
+        }: MessageEvent) => {
+            if (type === "progress") onProgress?.(pct);
+            else if (type === "chunk")
+                queue.push({ type: "chunk", value: chunk });
+            else if (type === "done") queue.push({ type: "done" });
+            else if (type === "error")
+                queue.push({ type: "error", error: new Error(error) });
+            notify?.();
+        };
+
+        w.addEventListener("message", onMessage);
+        w.postMessage({ text });
+
+        try {
+            while (true) {
+                if (!queue.length)
+                    await new Promise<void>((r) => {
+                        notify = r;
+                    });
+                notify = null;
+                const item = queue.shift();
+                if (!item) continue;
+                if (item.type === "chunk") yield item.value;
+                else if (item.type === "done") break;
+                else throw item.error;
+            }
+        } finally {
+            w.removeEventListener("message", onMessage);
+        }
     }
 
     function initSummaryWidget() {
@@ -170,7 +233,7 @@
         function showProgress(pct: number) {
             if (progressContainer && progressBar) {
                 progressContainer.classList.remove("hidden");
-                progressLabel?.classList.remove("hidden");
+                progressLabel?.classList.toggle("hidden", pct >= 100);
                 progressBar.style.width = `${pct}%`;
             }
         }
@@ -184,105 +247,50 @@
         btn?.addEventListener("click", async () => {
             setLoading(true);
 
+            const { textContent } = getSlotContent();
+            if (!textContent) {
+                console.warn("No text content found to summarize.");
+                setLoading(false);
+                return;
+            }
+
+            const summarize: SummarizerFn =
+                api === "built-in" ? summarizeBuiltIn : summarizeTransformers;
             const summaryResultElement =
                 document.getElementById("summary-result");
+            const summarySkeletonElement =
+                document.getElementById("summary-skeleton");
 
+            // Reset: rimuove i text node precedenti mantenendo lo skeleton nel DOM
+            if (summaryResultElement) {
+                for (const node of [...summaryResultElement.childNodes]) {
+                    if (node !== summarySkeletonElement) node.remove();
+                }
+            }
+
+            summaryResultElement?.classList.remove("hidden");
+            summarySkeletonElement?.classList.remove("hidden");
+
+            let firstChunk = true;
             try {
-                if (api === "built-in") {
-                    const options = {
-                        type: "tldr",
-                        length: "long",
-                        format: "plain-text",
-                        outputLanguage: "en",
-                    } satisfies SummarizerCreateCoreOptions;
-
-                    const available = await Summarizer.availability(options);
-
-                    if (available === "unavailable") {
-                        console.warn(
-                            "Summarizer API is unavailable in this environment.",
-                        );
-                        setLoading(false);
-                        return;
+                for await (const chunk of summarize(
+                    textContent,
+                    showProgress,
+                )) {
+                    if (firstChunk) {
+                        firstChunk = false;
+                        summarySkeletonElement?.classList.add("hidden");
+                        hideProgress();
                     }
-
-                    console.log("Summarizer available:", available);
-
-                    const summarizer = await Summarizer.create({
-                        ...options,
-                        monitor(m) {
-                            m.addEventListener("downloadprogress", (e) => {
-                                const pct = Math.round(e.loaded * 100);
-                                console.log(`Downloaded ${pct}%`);
-                                showProgress(pct);
-                            });
-                        },
-                    });
-
-                    hideProgress();
-
-                    const content = getSlotContent();
-
-                    if (!content.textContent) {
-                        console.warn("No text content found to summarize.");
-                        setLoading(false);
-                        return;
-                    }
-
-                    const summary = summarizer.summarizeStreaming(
-                        content.textContent,
-                        {
-                            context:
-                                "This article is intended for software developers.",
-                        },
-                    );
-
-                    if (summaryResultElement) {
-                        summaryResultElement.textContent = "";
-
-                        for await (const chunk of summary) {
-                            if (!summaryResultElement.textContent) {
-                                summaryResultElement.classList.remove("hidden");
-                            }
-                            summaryResultElement.append(chunk);
-                        }
-                    }
-                } else if (api === "transformers") {
-                    const content = getSlotContent();
-
-                    if (!content.textContent) {
-                        console.warn("No text content found to summarize.");
-                        setLoading(false);
-                        return;
-                    }
-
-                    if (summaryResultElement) {
-                        summaryResultElement.textContent = "";
-                    }
-
-                    await summarizeWithWorker(
-                        content.textContent,
-                        showProgress,
-                        (chunk) => {
-                            if (summaryResultElement) {
-                                if (!summaryResultElement.textContent) {
-                                    summaryResultElement.classList.remove("hidden");
-                                }
-                                summaryResultElement.append(
-                                    summaryResultElement.textContent ? " " + chunk : chunk
-                                );
-                            }
-                        },
-                    );
-
-                    hideProgress();
+                    summaryResultElement?.append(chunk);
                 }
             } catch (err) {
                 console.error("Summarization failed:", err);
+            } finally {
+                summarySkeletonElement?.classList.add("hidden");
                 hideProgress();
+                setLoading(false);
             }
-
-            setLoading(false);
         });
     }
 
