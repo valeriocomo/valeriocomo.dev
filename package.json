@@ -22,7 +22,7 @@
     "@eliancodes/brutal-ui": "^0.2.6",
     "@huggingface/transformers": "^4.1.0",
     "@unocss/astro": "^66.6.8",
-    "astro": "^5.18.1",
+    "astro": "^6.1.6",
     "astro-font": "^1.1.0",
     "satori": "^0.26.0",
     "satori-html": "^0.3.2"
