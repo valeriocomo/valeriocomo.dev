@@ -6,6 +6,7 @@ import {
 } from 'unocss';
 
 export default defineConfig({
+  safelist: ['i-uil-github', 'i-uil-twitter', 'i-uil-linkedin', 'i-uil-medium-m', 'i-uil-rss'],
   presets: [
     presetWind(),
     presetIcons({
