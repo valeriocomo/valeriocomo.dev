@@ -14,6 +14,11 @@ export const SOCIALS = [
         url: 'https://www.linkedin.com/in/valeriocomo',
         icon: 'i-uil-linkedin',
     },
+    {
+        name: "Medium",
+        url: "https://www.medium.com/@valeriocomo",
+        icon: "i-uil-medium-m",
+    },
 ] as const;
 
 

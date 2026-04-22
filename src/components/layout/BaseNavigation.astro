@@ -3,7 +3,7 @@ import {
   BLOG_URL,
   CONTACTS_URL,
   HOME_URL,
-  MEDIUM_URL,
+  SOCIALS,
   TALKS_URL,
 } from "src/constants";
 import MobileNavigation from "./MobileNavigation.astro";
@@ -16,26 +16,11 @@ const navigationItems = [
   { name: "Home", url: HOME_URL, target: "_self" },
   { name: "Talks", url: TALKS_URL },
   { name: "Blog", url: BLOG_URL },
-  { name: "Medium", url: MEDIUM_URL, target: "_blank" },
   { name: "Contacts", url: CONTACTS_URL, target: "_blank" },
 ];
 
 const socialIcons = [
-  {
-    name: "GitHub",
-    url: "https://github.com/valeriocomo",
-    icon: "i-uil-github",
-  },
-  {
-    name: "Twitter",
-    url: "https://www.twitter.com/valeriocomo",
-    icon: "i-uil-twitter",
-  },
-  {
-    name: "Linkedin",
-    url: "https://www.linkedin.com/in/valeriocomo",
-    icon: "i-uil-linkedin",
-  },
+  ...SOCIALS,
   { name: "RSS", url: "/feed.xml", icon: "i-uil-rss" } as const,
 ];
 
