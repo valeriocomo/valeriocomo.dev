@@ -33,7 +33,7 @@ Assets for blog posts live in `src/assets/blog/<date-slug>/`; talk assets live i
 
 **Components** are organized by feature domain: `blog/`, `home/`, `talks/`, `layout/`, `generic/`, `errors/`. UI primitives (`Button`, `Card`, `Pill`) come from `@eliancodes/brutal-ui`.
 
-**OG Images:** Dynamically generated at `/v1/generate/og/[slug].png` using Satori + `@resvg/resvg-js`. Blog post assets live in `src/assets/blog/<date-slug>/`.
+**OG Images:** Generated at build time via `getStaticPaths()`. Two endpoints: `/v1/generate/og/[slug].png` (blog posts — title + description + portrait) and `/v1/generate/og/default.png` (homepage). Both use Satori (HTML→SVG) + `@resvg/resvg-js` (SVG→PNG) at 1200×630px. `@resvg/resvg-js` and `@huggingface/transformers` are excluded from Vite pre-bundling in `astro.config.ts` due to native/WASM modules.
 
 **Styling:** UnoCSS with `presetWind` (Tailwind), `presetIcons` (Iconify — logos + uil collections), and `presetTypography`. Global styles in `src/styles/global.css`.
 
@@ -45,6 +45,10 @@ Assets for blog posts live in `src/assets/blog/<date-slug>/`; talk assets live i
 
 **RSS & Sitemap:** Auto-generated at `/feed.xml` (RSS) and `/sitemap-index.xml` (sitemap) from content collections.
 
-**AI Summary:** Blog posts include a `BlogAISummary` component that uses the Chrome built-in Summarizer API (`window.Summarizer`) to generate TL;DRs client-side. It gracefully degrades to a hint for non-Chrome browsers.
+**AI Summary:** `BlogAISummary` component has two paths: (1) Chrome built-in `window.Summarizer` API (preferred); (2) fallback `src/workers/webnn-summarizer.worker.ts` using `@huggingface/transformers` with the `Xenova/distilbart-cnn-6-6` model, auto-selecting WebNN → WebGPU → WASM. Text is chunked at 9280 characters. `src/env.d.ts` includes `@types/dom-chromium-ai` for typed access to the Chrome AI APIs.
+
+**Styling details:** `src/styles/global.css` defines CSS custom properties (`--primary: white`, `--secondary: black`), `.card-shadow` (7px drop-shadow with hover transition), and a custom scrollbar with diagonal stripe pattern.
+
+**RSS feed:** Draft posts are NOT filtered in `src/pages/feed.xml.js` — drafts appear in the feed if `draft: true` is set.
 
 **Site constants:** URLs, social links, and external references are centralized in `src/constants.ts`.
