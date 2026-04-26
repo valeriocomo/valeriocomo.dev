@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 import { FAVICON_URL } from "src/constants";
 import LocalFont from "../generic/LocalFont.astro";
 
@@ -73,7 +73,7 @@ const { title, description, ogImage } = Astro.props;
     gtag("config", "G-GWX720GM40");
   </script>
 
-  <ViewTransitions />
+  <ClientRouter />
 
   <slot />
 </head>
