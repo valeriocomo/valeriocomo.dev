@@ -18,9 +18,9 @@ pnpm prettier --write src/
 
 ## Architecture
 
-Personal blog and portfolio site built with **Astro 5** and **UnoCSS** (Tailwind-compatible).
+Personal blog and portfolio site built with **Astro 6** and **UnoCSS** (Tailwind-compatible).
 
-**Content:** Blog posts and talks are managed via Astro's content collections in `src/content/`. Schema definitions live in `src/content.config.ts` (Astro 5 root-level location, not `src/content/config.ts`).
+**Content:** Blog posts and talks are managed via Astro's content collections in `src/content/`. Schema definitions live in `src/content.config.ts` (root-level, not `src/content/config.ts`).
 
 - Blog (`src/content/blog/`) — filename convention `YYYY-MM-DD-slug.md`. Frontmatter: `title`, `pubDate` (e.g. `2025/02/17 9:20`), `author`, `tags` (array), `imgUrl` (relative path to `src/assets/blog/<date-slug>/`), `description`, `draft` (optional boolean, defaults `false`).
 - Talks (`src/content/talks/`) — filename convention `YY-MM-DD-event-name.md`. Frontmatter: `title`, `abstract`, `date`, `link`, `name` (event name), `img` (relative path to `src/assets/talks/`).
@@ -43,7 +43,7 @@ Assets for blog posts live in `src/assets/blog/<date-slug>/`; talk assets live i
 
 **Analytics:** Google Analytics loaded via Partytown (configured in `astro.config.ts`).
 
-**Pages routing:** `src/pages/index.astro` (home), `src/pages/talks.astro`, `src/pages/blog/index.astro` (listing), `src/pages/blog/[...slug].astro` (post), `src/pages/blog/tags/` (tag filtering), `src/pages/v1/generate/og/` (OG image endpoints).
+**Pages routing:** `src/pages/index.astro` (home), `src/pages/talks.astro`, `src/pages/blog/index.astro` (listing), `src/pages/blog/[slug].astro` (post), `src/pages/blog/tags/` (tag filtering), `src/pages/v1/generate/og/` (OG image endpoints).
 
 **RSS & Sitemap:** Auto-generated at `/feed.xml` (RSS) and `/sitemap-index.xml` (sitemap) from content collections.
 
