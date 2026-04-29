@@ -31,8 +31,8 @@ importers:
         specifier: ^66.6.8
         version: 66.6.8(vite@7.3.2(@types/node@24.10.1)(jiti@2.6.1))
       astro:
-        specifier: ^6.1.9
-        version: 6.1.9(@types/node@24.10.1)(jiti@2.6.1)(rollup@4.60.0)(typescript@5.8.3)
+        specifier: ^6.1.10
+        version: 6.1.10(@types/node@24.10.1)(jiti@2.6.1)(rollup@4.60.0)(typescript@5.8.3)
       astro-font:
         specifier: ^1.1.0
         version: 1.1.0
@@ -1205,8 +1205,8 @@ packages:
   astro-font@1.1.0:
     resolution: {integrity: sha512-hj1A0MkaJTeaArBpf1m9s4Nxu1Bn9h0QiEPeR9Dfjle25pT4CH4higzuadWzCRSvhGO2SzbM11YwZEF+cmLDxg==}
 
-  astro@6.1.9:
-    resolution: {integrity: sha512-NsAHzMzpznB281g2aM5qnBt2QjfH6ttKiZ3hSZw52If8JJ+62kbnBKbyKhR2glQcJLl7Jfe4GSl0DihFZ36rRQ==}
+  astro@6.1.10:
+    resolution: {integrity: sha512-jQAIki6c862oxRr7OXXC+h3n4wg1EpmKgCH3vv1FtXM9VFmD2iTjlaxrfb0I6eQCwtUjSBxfJBFBDSXHu7Wing==}
     engines: {node: '>=22.12.0', npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -4435,7 +4435,7 @@ snapshots:
 
   astro-font@1.1.0: {}
 
-  astro@6.1.9(@types/node@24.10.1)(jiti@2.6.1)(rollup@4.60.0)(typescript@5.8.3):
+  astro@6.1.10(@types/node@24.10.1)(jiti@2.6.1)(rollup@4.60.0)(typescript@5.8.3):
     dependencies:
       '@astrojs/compiler': 3.0.1
       '@astrojs/internal-helpers': 0.9.0
