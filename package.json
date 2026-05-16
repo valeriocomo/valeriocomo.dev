@@ -22,29 +22,29 @@
     "@eliancodes/brutal-ui": "^0.2.6",
     "@huggingface/transformers": "^4.1.0",
     "@unocss/astro": "^66.6.8",
-    "astro": "^6.1.9",
+    "astro": "^6.3.3",
     "astro-font": "^1.1.0",
     "satori": "^0.26.0",
     "satori-html": "^0.3.2"
   },
   "devDependencies": {
-    "@iconify-json/logos": "^1.2.10",
+    "@iconify-json/logos": "^1.2.11",
     "@iconify-json/uil": "^1.2.3",
     "@resvg/resvg-js": "^2.6.2",
     "@types/dom-chromium-ai": "^0.0.16",
-    "@typescript-eslint/parser": "^8.58.1",
-    "@unocss/reset": "^66.6.5",
+    "@typescript-eslint/parser": "^8.59.3",
+    "@unocss/reset": "^66.6.8",
     "eslint": "^9.39.2",
     "eslint-plugin-astro": "^1.7.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
-    "prettier": "^3.8.1",
+    "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
     "sharp": "^0.34.5",
     "unocss": "^66.6.0"
   },
   "pnpm": {
     "overrides": {
-      "fast-xml-parser": ">=5.5.11",
+      "fast-xml-parser": ">=5.7.2",
       "tmp@<=0.2.3": ">=0.2.4"
     }
   }
