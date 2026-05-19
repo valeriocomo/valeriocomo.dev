@@ -22,8 +22,8 @@ importers:
         specifier: ^3.7.2
         version: 3.7.2
       '@eliancodes/brutal-ui':
-        specifier: ^0.2.6
-        version: 0.2.7(astro@6.3.5(@types/node@25.8.0)(jiti@2.7.0)(rollup@4.60.4))
+        specifier: ^1.0.0
+        version: 1.0.0(astro@6.3.5(@types/node@25.8.0)(jiti@2.7.0)(rollup@4.60.4))
       '@huggingface/transformers':
         specifier: ^4.1.0
         version: 4.2.0
@@ -149,8 +149,8 @@ packages:
     resolution: {integrity: sha512-S0My7XPGIgpRWMDG8uRqalbgT+a6FmCUdOW+HaIOVVpUPHOb7RrpvjTjiODadKp06fsrVDJZlIzc6yCTp4AnxA==}
     engines: {node: '>= 20.12.0'}
 
-  '@eliancodes/brutal-ui@0.2.7':
-    resolution: {integrity: sha512-b7bIRA9/6AjfmXtfkx++In5AuNsX8gXzlcLfs005qDoMyFkl8XemeqdFN9qnaobghaykVKaGjoiQmfimXP3BVA==}
+  '@eliancodes/brutal-ui@1.0.0':
+    resolution: {integrity: sha512-r/uP7CCHbPj8E32/SN/jbUNppuwy8ItBf91tbzjNDJIqX9S9oW9E78BDmkBWQTZOXLgy6Dl8n7SAloFiZs4Jmw==}
     peerDependencies:
       astro: ^6.0.0
 
@@ -3178,7 +3178,7 @@ snapshots:
       fast-wrap-ansi: 0.2.0
       sisteransi: 1.0.5
 
-  '@eliancodes/brutal-ui@0.2.7(astro@6.3.5(@types/node@25.8.0)(jiti@2.7.0)(rollup@4.60.4))':
+  '@eliancodes/brutal-ui@1.0.0(astro@6.3.5(@types/node@25.8.0)(jiti@2.7.0)(rollup@4.60.4))':
     dependencies:
       astro: 6.3.5(@types/node@25.8.0)(jiti@2.7.0)(rollup@4.60.4)
 
