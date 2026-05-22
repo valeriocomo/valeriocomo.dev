@@ -23,7 +23,7 @@ importers:
         version: 3.7.2
       '@eliancodes/brutal-ui':
         specifier: ^1.0.0
-        version: 1.0.0(astro@6.3.6(@types/node@25.8.0)(jiti@2.7.0)(rollup@4.60.4))
+        version: 1.0.0(astro@6.3.7(@types/node@25.8.0)(jiti@2.7.0)(rollup@4.60.4))
       '@huggingface/transformers':
         specifier: ^4.1.0
         version: 4.2.0
@@ -31,8 +31,8 @@ importers:
         specifier: ^66.6.8
         version: 66.6.8(vite@7.3.3(@types/node@25.8.0)(jiti@2.7.0))
       astro:
-        specifier: ^6.3.6
-        version: 6.3.6(@types/node@25.8.0)(jiti@2.7.0)(rollup@4.60.4)
+        specifier: ^6.3.7
+        version: 6.3.7(@types/node@25.8.0)(jiti@2.7.0)(rollup@4.60.4)
       astro-font:
         specifier: ^1.1.0
         version: 1.1.0
@@ -1219,8 +1219,8 @@ packages:
   astro-font@1.1.0:
     resolution: {integrity: sha512-hj1A0MkaJTeaArBpf1m9s4Nxu1Bn9h0QiEPeR9Dfjle25pT4CH4higzuadWzCRSvhGO2SzbM11YwZEF+cmLDxg==}
 
-  astro@6.3.6:
-    resolution: {integrity: sha512-lM30gGI/iASK9Z1WQVnBBYzxVwDv8slkXbJOF7FNJdZQeBrFETpsQvYoLRupM/adt2ObP5hkYAWEeCjofoqlRw==}
+  astro@6.3.7:
+    resolution: {integrity: sha512-zIeDRrI0qNgN1lcCjNqt6/IVCVej7VwSa326cO8uP9BOk1cg4QuffhLnOn2gCgWQr32/wxpSRFfXiLKHglu1Tw==}
     engines: {node: '>=22.12.0', npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -3178,9 +3178,9 @@ snapshots:
       fast-wrap-ansi: 0.2.0
       sisteransi: 1.0.5
 
-  '@eliancodes/brutal-ui@1.0.0(astro@6.3.6(@types/node@25.8.0)(jiti@2.7.0)(rollup@4.60.4))':
+  '@eliancodes/brutal-ui@1.0.0(astro@6.3.7(@types/node@25.8.0)(jiti@2.7.0)(rollup@4.60.4))':
     dependencies:
-      astro: 6.3.6(@types/node@25.8.0)(jiti@2.7.0)(rollup@4.60.4)
+      astro: 6.3.7(@types/node@25.8.0)(jiti@2.7.0)(rollup@4.60.4)
 
   '@emnapi/core@1.10.0':
     dependencies:
@@ -4119,7 +4119,7 @@ snapshots:
 
   astro-font@1.1.0: {}
 
-  astro@6.3.6(@types/node@25.8.0)(jiti@2.7.0)(rollup@4.60.4):
+  astro@6.3.7(@types/node@25.8.0)(jiti@2.7.0)(rollup@4.60.4):
     dependencies:
       '@astrojs/compiler': 4.0.0
       '@astrojs/internal-helpers': 0.9.1
