@@ -18,11 +18,11 @@
   "dependencies": {
     "@astrojs/partytown": "^2.1.7",
     "@astrojs/rss": "^4.0.18",
-    "@astrojs/sitemap": "^3.7.2",
+    "@astrojs/sitemap": "^3.7.3",
     "@eliancodes/brutal-ui": "^1.0.0",
     "@huggingface/transformers": "^4.1.0",
     "@unocss/astro": "^66.6.8",
-    "astro": "^6.3.7",
+    "astro": "^6.3.8",
     "astro-font": "^1.1.0",
     "satori": "^0.26.0",
     "satori-html": "^0.3.2"
