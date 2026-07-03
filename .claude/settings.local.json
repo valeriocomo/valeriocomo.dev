@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm build:*)",
+      "Bash(gh api:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(node -e \"const icons = require\\('./node_modules/@iconify-json/uil/icons.json'\\); console.log\\(Object.keys\\(icons.icons\\).filter\\(k => k.includes\\('medium'\\)\\)\\)\")",
+      "Bash(node -e \"const pkg = require\\('./node_modules/@unocss/vite/package.json'\\); const def = pkg.main; console.log\\(pkg.version\\)\")",
+      "Bash(node -e \"const icons = require\\('./node_modules/@iconify-json/uil/icons.json'\\); const key = 'medium-m'; console.log\\(key, ':', icons.icons[key] ? 'EXISTS' : 'NOT FOUND'\\); console.log\\(JSON.stringify\\(icons.icons[key]\\)\\)\")",
+      "Bash(node -e ' *)",
+      "WebFetch(domain:docs.astro.build)",
+      "WebFetch(domain:github.com)",
+      "Bash(xargs cat)"
+    ]
+  }
+}
