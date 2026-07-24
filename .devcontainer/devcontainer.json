@@ -23,10 +23,11 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
+				"anthropic.claude-code",
+				"astro-build.astro-vscode",
 				"github.vscode-github-actions",
 				"github.vscode-pull-request-github",
-				"redhat.vscode-yaml",
-				"astro-build.astro-vscode"
+				"redhat.vscode-yaml"
 			],
 			"settings": {
 				"editor.formatOnSave": true,

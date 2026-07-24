@@ -24,7 +24,7 @@ const { author, pubDate, description, title, headings, imgUrl } = Astro.props;
   ogImage={ogImage}
 >
   <main class="p-6 lg:grid lg:grid-cols-3 flex justify-center">
-    <BlogSideBar headings={headings as any[]} />
+    <BlogSideBar headings={headings as []} />
     <BlogContent
       {author}
       {pubDate}

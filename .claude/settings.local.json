@@ -10,7 +10,12 @@
       "Bash(node -e ' *)",
       "WebFetch(domain:docs.astro.build)",
       "WebFetch(domain:github.com)",
-      "Bash(xargs cat)"
+      "Bash(xargs cat)",
+      "Bash(pnpm eslint *)",
+      "Bash(python3 -c ' *)",
+      "Bash(pnpm remove *)",
+      "Bash(echo \"LINT_EXIT=$?\")",
+      "Bash(pnpm add *)"
     ]
   }
 }

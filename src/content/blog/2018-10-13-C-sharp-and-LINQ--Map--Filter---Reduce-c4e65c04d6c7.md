@@ -16,7 +16,7 @@ Lavorare con JavaScript mi ha spinto, laddove possibile, ad adottare uno stile d
 
 Javascript mette a disposizioni le funzioni *map*, *reduce* e *filter* per effettuare operazioni sui dati di un array. Per spiegare il funzionamento di questi tre metodi basta guardare la seguente immagine.
 
-![](../../assets/blog/2018-10-13-csharp-and-linq/image1.png)
+![Map, Filter e Reduce illustration](../../assets/blog/2018-10-13-csharp-and-linq/image1.png)
 
 Una spiegazione illustrata di Map, Filter e Reduce
 

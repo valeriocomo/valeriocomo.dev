@@ -26,7 +26,7 @@ Some of this actions dive you into *Infinity Pools*. I don’t intend to spend t
 
 Starting from this point, *Make Time* describes a framework, split in 4 phases, to keep you up focus to your goals. The authors describe tips and tactics for every phases.
 
-![](../../assets/blog/2023-05-23-create-more-time/image1.png)
+![Make Time framework with 4 phases: Highlight, Laser, Energize, and Reflect](../../assets/blog/2023-05-23-create-more-time/image1.png)
 
 How Make Time works. [Credits](https://maketime.blog/).
 

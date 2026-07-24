@@ -31,5 +31,8 @@ jobs:
             - name: Install dependencies
               run: pnpm install
 
+            - name: Lint astro project
+              run: pnpm lint
+
             - name: Build astro project
               run: pnpm build

@@ -53,8 +53,8 @@ const { title, description, ogImage } = Astro.props;
   <!-- Google tag (gtag.js) -->
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
-    window.gtag = function () {
-      dataLayer.push(arguments);
+    window.gtag = function (...args) {
+      dataLayer.push(...args);
     };
     gtag("consent", "default", {
       ad_storage: "denied",

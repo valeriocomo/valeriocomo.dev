@@ -11,7 +11,7 @@ description: A brief introduction to WebAssembly, starting with a newsletter fro
 
 Era un caldo pomeriggio di giugno ed il mio smartphone squillò, segnalandomi l’arrivo di una nuova mail. Mi era stata recapitata la JavaScript Weekly, newsletter alla quale ero iscritto da qualche tempo. Come ogni settimana, leggo la mail alla ricerca di qualche accattivante articolo da leggere.
 
-![](../../assets/blog/2018-02-13-web-assembly/image1.png)
+![JavaScript Weekly email](../../assets/blog/2018-02-13-web-assembly/image1.png)
 
 Una email di JavaScript Weekly
 
@@ -46,19 +46,19 @@ Queste sue caratteristiche rivelano dei pro e dei contro.
 
 Le prime versioni degli interpreti si rivelarono molto lente. Con la [seconda guerra dei browser](https://it.wikipedia.org/wiki/Guerra_dei_browser#Seconda_guerra_dei_browser_%28dal_2004_ad_oggi%29), gli engine hanno avuto un incremento netto delle performance; *V8*, l’interprete Javascript di Google Chrome, ha introdotto *TurboFan* che effettua delle ottimizzazioni a runtime, andando ad identificare le porzioni di codice eseguite più spesso e ottimizzandole.
 
-![](../../assets/blog/2018-02-13-web-assembly/image2.png)
+![V8 with TurboFan diagram](../../assets/blog/2018-02-13-web-assembly/image2.png)
 
 V8 con TurboFan
 
 Questa soluzione ha portato ad un miglioramento delle performance, a scapito di un utilizzo maggiore della CPU e di un consumo maggiore della batteria sui dispositivi mobili. Oltre ad essere un linguaggio interpretato, Javascript è un linguaggio tipizzato dinamicamente; l’interprete deve definire il tipo di una variabile a runtime. Per capire quanto questo aspetto impatta sulle performance, faccio questo semplice esempio:
 
-![](../../assets/blog/2018-02-13-web-assembly/image3.png)
+![JavaScript function example](../../assets/blog/2018-02-13-web-assembly/image3.png)
 
 Function Javascript che restituisce il risultato dell’operatore addizione su due parametri
 
 Questa function acquisisce in input due parametri e resistuisce la loro addizione. Da specifiche, l’operatore addizione è cosi definito:
 
-![](../../assets/blog/2018-02-13-web-assembly/image4.png)
+![JavaScript addition operator specification](../../assets/blog/2018-02-13-web-assembly/image4.png)
 
 Specifiche Javascript per l’operatore addizione
 

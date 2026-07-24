@@ -3,22 +3,6 @@ import AboutMe from "@components/home/AboutMe.astro";
 import Description from "@components/home/Description.astro";
 import MobileSocials from "@components/home/MobileSocials.astro";
 import Layout from "@layouts/Default.astro";
-
-const builtWith = [
-  { name: "Astro", url: "https://astro.build/" },
-  { name: "UnoCSS", url: "https://uno.antfu.me/" },
-  {
-    name: "Content Collections",
-    url: "https://docs.astro.build/en/guides/content-collections/",
-  },
-  { name: "RSS", url: "https://docs.astro.build/en/guides/rss/" },
-  {
-    name: "Sitemap",
-    url: "https://docs.astro.build/en/guides/integrations-guide/sitemap/",
-  },
-  { name: "Github", url: "https://github.com" },
-  { name: "TypeScript", url: "https://www.typescriptlang.org/" },
-];
 ---
 
 <Layout
@@ -30,6 +14,5 @@ const builtWith = [
     <MobileSocials />
     <AboutMe />
     <Description />
-    <!-- <RecentBlogPosts /> -->
   </main>
 </Layout>

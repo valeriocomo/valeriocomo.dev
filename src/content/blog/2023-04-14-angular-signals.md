@@ -19,7 +19,7 @@ The answer is simple: **no**.
 
 *Signals* provide a straightforward approach to solve a similar problem. Take a look at this simple example.
 
-![](../../assets/blog/2023-04-14-angular-signals/image1.png)
+![Signals example showing number and squared variables](../../assets/blog/2023-04-14-angular-signals/image1.png)
 
 In this example, we have two variables: *number* and *squared*.
 

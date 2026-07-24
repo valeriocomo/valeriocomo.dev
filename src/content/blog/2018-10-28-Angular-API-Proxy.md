@@ -27,7 +27,7 @@ Supponiamo che la SPA venga servita da un server sulla porta 4200 e che il serve
 
 Se il client effettuasse una richiesta HTTP senza aver configurato il proxy o i CORS, il browser negherebbe la possibilità di raggiungere il server.
 
-![](../../assets/blog/2018-10-28-angular-api-proxy/image1.png)
+![Diagram showing blocked CORS request](../../assets/blog/2018-10-28-angular-api-proxy/image1.png)
 
 Figura 1: CORS abilitate
 
@@ -37,7 +37,7 @@ Configuriamo correttamente il proxy, delegando DevServer a fare da tramite tra a
 
 In pratica, la chiamata è effettuata sullo stesso dominio della applicazione Angular, ovvero verso DevServer.
 
-![](../../assets/blog/2018-10-28-angular-api-proxy/image2.png)
+![Diagram showing DevServer proxy configuration](../../assets/blog/2018-10-28-angular-api-proxy/image2.png)
 
 Figura 2: Proxy configurato
 
