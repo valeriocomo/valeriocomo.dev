@@ -21,7 +21,7 @@ But, why does Angular need its own module system? An Angular module, *NgModule*,
 
 This is a simple example of a Standalone Component:
 
-![](../../assets/blog/2023-06-28-angular-standalone-components/image1.png)
+![TypeScript code snippet showing a Standalone Component decorator with standalone: true flag, displaying component metadata including selector, template, styles, and imports array containing CommonModule and RouterModule](../../assets/blog/2023-06-28-angular-standalone-components/image1.png)
 
 A simple example
 
@@ -33,7 +33,7 @@ The bootstrapping of an Angular application starts from a module (usually *AppMo
 
 The adoption of Standalone Components brings a new way to bootstrap an Angular application. This example is taken from a real project I am working on.
 
-![](../../assets/blog/2023-06-28-angular-standalone-components/image2.png)
+![TypeScript code showing bootstrapApplication function with a component and providers configuration](../../assets/blog/2023-06-28-angular-standalone-components/image2.png)
 
 A main.ts taken form a real world project
 
@@ -56,7 +56,7 @@ Standalone Components brings a fresh air to Angular. Some tiny changes have been
 
 Standalone Components could be loaded lazily by using *loadComponent.*
 
-![](../../assets/blog/2023-06-28-angular-standalone-components/image3.png)
+![TypeScript code showing the loadComponent usage in a route configuration](../../assets/blog/2023-06-28-angular-standalone-components/image3.png)
 
 A loadComponent example
 

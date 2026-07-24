@@ -14,7 +14,7 @@ Nei mesi passati ho lavorato allo sviluppo di un piccolo gestionale. Era un prog
 
 Il team ha deciso di adottare lo standard *Json Web Token* ([JWT](https://en.wikipedia.org/wiki/JSON_Web_Token)) per gestire l’autenticazione, anche perchè Laravel rende l’integrazione davvero semplice utilizzando il package *Passport*.
 
-![](../../assets/blog/2019-03-26-angular-authentication-http-interceptor-jwt/image1.png)
+![Carlo Lucarelli](../../assets/blog/2019-03-26-angular-authentication-http-interceptor-jwt/image1.png)
 
 Carlo Lucarelli
 

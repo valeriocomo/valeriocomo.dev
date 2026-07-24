@@ -10,11 +10,14 @@ pnpm build      # Build for production
 pnpm preview    # Preview production build
 ```
 
-No test or lint scripts are configured in package.json. ESLint and Prettier are installed and can be run directly:
 ```bash
-pnpm eslint src/
+pnpm lint       # ESLint on src/ (same as `pnpm eslint src/`)
 pnpm prettier --write src/
 ```
+
+No test scripts are configured in package.json — there is no test runner in this repo.
+
+ESLint uses flat config (`eslint.config.ts`) with `typescript-eslint`, `eslint-plugin-astro` (covers `.astro` files, including its bundled `flat/jsx-a11y-recommended` a11y rules — this requires `eslint-plugin-jsx-a11y` to be installed even though it isn't imported directly in the config), plus `@eslint/markdown` and `@eslint/css` for linting `.md` and `.css` files. CI (`.github/workflows/ci.yml`) runs `pnpm lint` then `pnpm build` on every PR. A separate nightly workflow (`.github/workflows/nightly.yml`) runs `@astrojs/upgrade` and opens a PR with any Astro updates.
 
 ## Architecture
 
