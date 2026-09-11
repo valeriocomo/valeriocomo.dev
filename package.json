@@ -32,7 +32,7 @@
     "@eslint/css": "^1.4.0",
     "@eslint/js": "^10.0.1",
     "@eslint/markdown": "^8.0.3",
-    "@iconify-json/logos": "^1.2.11",
+    "@iconify-json/logos": "^1.2.14",
     "@iconify-json/uil": "^1.2.3",
     "@resvg/resvg-js": "^2.6.2",
     "@types/dom-chromium-ai": "^0.0.17",
