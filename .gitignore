@@ -3,3 +3,5 @@ node_modules
 dist
 .pnpm-store
 .DS_Store
+# Claude Code personal settings
+.claude/settings.local.json
