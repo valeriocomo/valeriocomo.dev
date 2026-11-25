@@ -6,7 +6,7 @@ name: preview
 # Required repository secrets:
 #   CLOUDFLARE_API_TOKEN   – token with "Cloudflare Pages: Edit" permission
 #   CLOUDFLARE_ACCOUNT_ID  – Cloudflare account ID
-# Required Cloudflare Pages project (Direct Upload): valeriocomo-preview
+# Required Cloudflare Pages project (Direct Upload): valeriocomo-dev-preview
 
 on:
   pull_request:
@@ -54,7 +54,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=valeriocomo-preview --branch=pr-${{ github.event.number }} --commit-hash=${{ github.event.pull_request.head.sha }}
+          command: pages deploy dist --project-name=valeriocomo-dev-preview --branch=pr-${{ github.event.number }} --commit-hash=${{ github.event.pull_request.head.sha }}
 
       - name: Comment preview URL
         uses: marocchino/sticky-pull-request-comment@v2
