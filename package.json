@@ -44,7 +44,7 @@
     "jiti": "^2.7.0",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
-    "sharp": "^0.35.4",
+    "sharp": "^0.35.5",
     "tailwind-csstree": "^0.4.2",
     "typescript-eslint": "^8.62.1"
   },
