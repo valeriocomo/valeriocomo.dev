@@ -21,7 +21,7 @@
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.6",
     "@eliancodes/brutal-ui": "^1.0.0",
-    "@huggingface/transformers": "^4.1.0",
+    "@huggingface/transformers": "^4.3.2",
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.5",
     "astro": "^7.4.7",
