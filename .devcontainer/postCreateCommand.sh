@@ -7,4 +7,5 @@ sudo chown -R node:node .pnpm-store
 cp -r .devcontainer/scripts/git/* .git/hooks
 
 pnpm install
+pnpm setup
 pnpm install -g localtunnel

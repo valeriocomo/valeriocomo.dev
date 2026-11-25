@@ -10,10 +10,12 @@
 	],
 	"remoteEnv": {
 		"CLAUDE_CODE_OAUTH_TOKEN": "${localEnv:CLAUDE_CODE_OAUTH_TOKEN}",
-		"GH_TOKEN": "${localEnv:GH_TOKEN}"
+		"GH_TOKEN": "${localEnv:GH_TOKEN}",
+		"PATH": "${containerEnv:PNPM_HOME}:${containerEnv:PATH}"
 	},
 	"containerEnv": {
-		"CHOKIDAR_USEPOLLING": "true"
+		"CHOKIDAR_USEPOLLING": "true",
+		"PNPM_HOME": "/home/node/.local/share/pnpm"
 	},
 	"image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
 	"features": {
