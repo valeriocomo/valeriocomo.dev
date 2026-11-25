@@ -17,11 +17,11 @@ pnpm prettier --write src/
 
 No test scripts are configured in package.json — there is no test runner in this repo.
 
-ESLint uses flat config (`eslint.config.ts`) with `typescript-eslint`, `eslint-plugin-astro` (covers `.astro` files, including its bundled `flat/jsx-a11y-recommended` a11y rules — this requires `eslint-plugin-jsx-a11y` to be installed even though it isn't imported directly in the config), plus `@eslint/markdown` and `@eslint/css` for linting `.md` and `.css` files. CI (`.github/workflows/ci.yml`) runs `pnpm lint` then `pnpm build` on every PR. A separate nightly workflow (`.github/workflows/nightly.yml`) runs `@astrojs/upgrade` and opens a PR with any Astro updates.
+ESLint uses flat config (`eslint.config.ts`) with `typescript-eslint`, `eslint-plugin-astro` (covers `.astro` files, including its bundled `flat/jsx-a11y-recommended` a11y rules — this requires `eslint-plugin-jsx-a11y` to be installed even though it isn't imported directly in the config), plus `@eslint/markdown` and `@eslint/css` for linting `.md` and `.css` files. CSS is parsed with `tailwind-csstree` (`customSyntax: tailwind4`) so Tailwind at-rules (`@theme`, `@utility`, `@plugin`, `@custom-variant`) are understood; it does not accept `mask*` properties inside `@utility`, which is why icons are plain classes (see Styling). CI (`.github/workflows/ci.yml`) runs `pnpm lint` then `pnpm build` on every PR. A separate nightly workflow (`.github/workflows/nightly.yml`) runs `@astrojs/upgrade` and opens a PR with any Astro updates.
 
 ## Architecture
 
-Personal blog and portfolio site built with **Astro 6** and **UnoCSS** (Tailwind-compatible).
+Personal blog and portfolio site built with **Astro 6** and **Tailwind CSS v4**.
 
 **Content:** Blog posts and talks are managed via Astro's content collections in `src/content/`. Schema definitions live in `src/content.config.ts` (root-level, not `src/content/config.ts`).
 
@@ -38,7 +38,11 @@ Assets for blog posts live in `src/assets/blog/<date-slug>/`; talk assets live i
 
 **OG Images:** Generated at build time via `getStaticPaths()`. Two endpoints: `/v1/generate/og/[slug].png` (blog posts — title + description + portrait) and `/v1/generate/og/default.png` (homepage). Both use Satori (HTML→SVG) + `@resvg/resvg-js` (SVG→PNG) at 1200×630px. `@resvg/resvg-js` and `@huggingface/transformers` are excluded from Vite pre-bundling in `astro.config.ts` due to native/WASM modules.
 
-**Styling:** UnoCSS with `presetWind` (Tailwind), `presetIcons` (Iconify — logos + uil collections), and `presetTypography`. Global styles in `src/styles/global.css`. Icon classes used dynamically (e.g. from the `SOCIALS` array) must be added to the `safelist` in `uno.config.ts` — UnoCSS only generates CSS for statically-scanned classes.
+**Styling:** Tailwind CSS v4 via `@tailwindcss/vite` (no `tailwind.config` file — all configuration is CSS-first in `src/styles/global.css`, imported by `Default.astro`), plus `@tailwindcss/typography` for `prose`. The site was migrated from UnoCSS, so `global.css` contains a compatibility layer that keeps the old class names working with UnoCSS's exact values:
+- Bare color names (`bg-pink`, `text-green`, `hover:bg-red`, `text-slate`, `text-dark`, …) and the gray/blue shades in use are defined in `@theme` with the Tailwind v3 rgb palette. Prefer these existing names; new shades not listed there will use Tailwind v4's oklch palette.
+- UnoCSS-only utilities (`w-prose`, `transition-300`, `transition-color`, `underline-white`) are defined with `@utility`.
+- `@custom-variant hover (&:hover)` keeps hover styles on touch devices, as UnoCSS did.
+- Icons (`i-uil-*`, `i-logos-*`) are hand-written CSS classes in `@layer components` (URL-encoded SVG as a CSS mask, `1em` default size). They sit in `components` so size utilities like `w-6 h-6` override them. To add an icon, copy its SVG (e.g. from icones.js.org) into a new class following the same pattern. There is no icon safelist: Tailwind scans `.ts` files too, so class names in `src/constants.ts` are picked up.
 
 **Fonts:** Self-hosted in `public/fonts/` (Outfit, Poppins, Righteous, Sanchez, DM Serif Text). Loaded via `LocalFont.astro` using `astro-font`; apply with CSS class selectors (`.outfit`, `.poppins`, etc.).
 
