@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm build:*)",
+      "Bash(pnpm lint:*)",
+      "Bash(pnpm eslint *)",
+      "WebFetch(domain:docs.astro.build)"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "astro-docs"
+  ]
+}
