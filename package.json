@@ -46,7 +46,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "sharp": "^0.35.5",
     "tailwind-csstree": "^0.4.2",
-    "typescript-eslint": "^8.62.1"
+    "typescript-eslint": "^8.73.0"
   },
   "pnpm": {
     "overrides": {
