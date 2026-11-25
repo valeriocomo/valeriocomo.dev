@@ -17,7 +17,7 @@
 		"CHOKIDAR_USEPOLLING": "true",
 		"PNPM_HOME": "/home/node/.local/share/pnpm"
 	},
-	"image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:26-trixie",
 	"features": {
 		"ghcr.io/devcontainers-extra/features/firebase-cli:2": {},
 		"ghcr.io/devcontainers/features/github-cli:1": {
