@@ -8,12 +8,25 @@
 		4321,
 		3000
 	],
+	"remoteEnv": {
+		"CLAUDE_CODE_OAUTH_TOKEN": "${localEnv:CLAUDE_CODE_OAUTH_TOKEN}",
+		"GH_TOKEN": "${localEnv:GH_TOKEN}",
+		"PATH": "${containerEnv:PNPM_HOME}:${containerEnv:PATH}"
+	},
 	"containerEnv": {
-		"CHOKIDAR_USEPOLLING": "true"
+		"CHOKIDAR_USEPOLLING": "true",
+		"PNPM_HOME": "/home/node/.local/share/pnpm"
 	},
 	"image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
 	"features": {
-		"ghcr.io/devcontainers-extra/features/firebase-cli:2": {}
+		"ghcr.io/devcontainers-extra/features/firebase-cli:2": {},
+		"ghcr.io/devcontainers/features/github-cli:1": {
+			"installDirectlyFromGitHubRelease": true,
+			"version": "latest"
+		},
+		"ghcr.io/devcontainers-extra/features/claude-code:2": {
+			"version": "latest"
+		}
 	},
 	"mounts": [
 		"source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
