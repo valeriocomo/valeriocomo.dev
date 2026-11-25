@@ -1,0 +1,67 @@
+name: preview
+
+# Deploys every PR to Cloudflare Pages and comments the public preview URL on the PR.
+# Production stays on GitHub Pages (see deploy.yml).
+#
+# Required repository secrets:
+#   CLOUDFLARE_API_TOKEN   – token with "Cloudflare Pages: Edit" permission
+#   CLOUDFLARE_ACCOUNT_ID  – Cloudflare account ID
+# Required Cloudflare Pages project (Direct Upload): valeriocomo-preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: preview-${{ github.event.number }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    # PRs from forks don't receive secrets, so skip them.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 9.0.0
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build astro project
+        run: pnpm build
+
+      - name: Deploy to Cloudflare Pages
+        id: deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=valeriocomo-preview --branch=pr-${{ github.event.number }} --commit-hash=${{ github.event.pull_request.head.sha }}
+
+      - name: Comment preview URL
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: preview
+          message: |
+            🔍 **Preview deployed**
+
+            - Stable URL for this PR: ${{ steps.deploy.outputs.pages-deployment-alias-url || 'n/a' }}
+            - This commit (`${{ github.event.pull_request.head.sha }}`): ${{ steps.deploy.outputs.deployment-url }}
