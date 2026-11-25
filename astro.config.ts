@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import UnoCSS from 'unocss/astro';
+import tailwindcss from '@tailwindcss/vite';
 
 import partytown from '@astrojs/partytown';
 
@@ -21,10 +21,10 @@ export default defineConfig({
   trailingSlash: 'ignore',
   integrations: [
     sitemap(),
-    UnoCSS({ injectReset: true }),
     partytown({ config: { forward: ["dataLayer.push"] } })
   ],
   vite: {
+    plugins: [tailwindcss()],
     optimizeDeps: {
       exclude: ['@resvg/resvg-js', '@huggingface/transformers'],
     },
