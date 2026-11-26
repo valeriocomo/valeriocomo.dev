@@ -17,14 +17,14 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/partytown": "^2.1.7",
+    "@astrojs/partytown": "^2.1.9",
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.6",
     "@eliancodes/brutal-ui": "^1.0.0",
     "@huggingface/transformers": "^4.3.2",
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.5",
-    "astro": "^7.4.7",
+    "astro": "^7.4.13",
     "astro-font": "^1.1.0",
     "satori": "^0.33.5",
     "satori-html": "^0.3.2",
