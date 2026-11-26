@@ -57,7 +57,7 @@ jobs:
           command: pages deploy dist --project-name=valeriocomo-dev-preview --branch=pr-${{ github.event.number }} --commit-hash=${{ github.event.pull_request.head.sha }}
 
       - name: Comment preview URL
-        uses: marocchino/sticky-pull-request-comment@v2
+        uses: marocchino/sticky-pull-request-comment@v3
         with:
           header: preview
           message: |
